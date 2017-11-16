@@ -19,8 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-public abstract class GameLevel implements ActionListener 
-{
+public abstract class GameLevel implements ActionListener {
 	private Vector<Card> turnedCardsBuffer;					// List of cards turned up in current turn
 	private int TotalCardsPerDeck = 52;
 	private TurnsTakenCounterLabel turnsTakenCounter;	    // Turn counter is incremented at every card turned up
@@ -32,7 +31,8 @@ public abstract class GameLevel implements ActionListener
 	private int rowsPerGrid = 16;							// Number of card rows in Grid
 	private int cardsToTurnUp = 2;							// Number of cards to turn up on each turn
 	private int totalUniqueCards = rowsPerGrid * cardsPerRow;	// Total number of cards in the grid
-
+	private ScoreCounterLabel scoreCounter;
+	
 	protected String cardNames[] = 
 		{   "2c", "2d", "2h", "2s", "3c", "3d", "3h", "3s", "4c", "4d", "4h", "4s",
 				"5c", "5d", "5h", "5s", "6c", "6d", "6h", "6s", "7c", "7d", "7h", "7s",
@@ -51,9 +51,10 @@ public abstract class GameLevel implements ActionListener
 	 *
 	 * @param validTurnTime reference to turn counter label in main program window
 	 */
-	protected GameLevel(TurnsTakenCounterLabel counterLabel, int cardsToGuess, JFrame mainFrame)
+	protected GameLevel(TurnsTakenCounterLabel counterLabel, int cardsToGuess, ScoreCounterLabel scoreCounter, JFrame mainFrame)
 	{
 		this.turnsTakenCounter = counterLabel; counterLabel.reset();
+		this.scoreCounter = scoreCounter; scoreCounter.reset();
 		this.turnedCardsBuffer= new Vector<Card>(cardsToGuess);
 		this.mainFrame = (MemoryFrame) mainFrame;
 		this.turnDownTimer = new Timer(turnDownDelay, this);
@@ -72,6 +73,7 @@ public abstract class GameLevel implements ActionListener
 	public int getTotalCardsPerDeck()          { return TotalCardsPerDeck; }
 	public int getTotalUniqueCards()           { return totalUniqueCards;  }
 	public TurnsTakenCounterLabel getTurnsTakenCounter() { return turnsTakenCounter; }
+	public ScoreCounterLabel getScoreCounter() { return scoreCounter; }
 	public Timer getTurnDownTimer()            { return turnDownTimer; }
 	public ImageIcon[] getCardIcons()          { return cardIcons;     }
 	public MemoryFrame getMainFrame() { return mainFrame; }
@@ -107,6 +109,10 @@ public abstract class GameLevel implements ActionListener
 
 	public void setTurnsTakenCounter(TurnsTakenCounterLabel turnsTakenCounter) {
 		this.turnsTakenCounter = turnsTakenCounter;
+	}
+	
+	public void setScoreCounter(ScoreCounterLabel scoreCounter) {
+		this.scoreCounter = scoreCounter;
 	}
 	
 	public void setTurnDownTimer(Timer turnDownTimer) {
@@ -153,7 +159,7 @@ public abstract class GameLevel implements ActionListener
 	}
 	
 	/**
-	 * Returns true iff game is over. False otherwise.
+	 * Returns true if game is over. False otherwise.
 	 * 
 	 */
 	protected abstract boolean  isGameOver();

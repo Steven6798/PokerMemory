@@ -14,8 +14,8 @@ public class RankTrioLevel extends EqualPairLevel {
 
 	// TRIO LEVEL: The goal is to find, on each turn, three cards with the same rank
 
-	protected RankTrioLevel(TurnsTakenCounterLabel validTurnTime, JFrame mainFrame) {
-		super(validTurnTime, mainFrame);
+	protected RankTrioLevel(TurnsTakenCounterLabel validTurnTime, ScoreCounterLabel scoreCounter, JFrame mainFrame) {
+		super(validTurnTime, scoreCounter, mainFrame);
 		this.getTurnsTakenCounter().setDifficultyModeLabel("Trio Level");
 		this.setCardsToTurnUp(3);
 		this.setCardsPerRow(10);

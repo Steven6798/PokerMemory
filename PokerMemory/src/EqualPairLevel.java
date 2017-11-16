@@ -14,8 +14,8 @@ import javax.swing.JFrame;
 
 public class EqualPairLevel extends EasyLevel {
 
-	protected EqualPairLevel(TurnsTakenCounterLabel validTurnTime, JFrame mainFrame) {
-		super(validTurnTime, mainFrame);
+	protected EqualPairLevel(TurnsTakenCounterLabel validTurnTime, ScoreCounterLabel scoreCounter, JFrame mainFrame) {
+		super(validTurnTime, scoreCounter, mainFrame);
 		super.getTurnsTakenCounter().setDifficultyModeLabel("Medium Level");
 	}
 	
@@ -74,11 +74,16 @@ public class EqualPairLevel extends EasyLevel {
 				this.getTurnsTakenCounter().increment();
 				// get the other card (which was already turned up)
 				Card otherCard = (Card) this.getTurnedCardsBuffer().get(0);
-				// the cards match, so remove them from the list (they will remain face up)
-				if( otherCard.getNum() == card.getNum())
+				// the cards match, so remove them from the list (they will remain face up) and add 50 points
+				if( otherCard.getNum() == card.getNum()) {
 					this.getTurnedCardsBuffer().clear();
-				// the cards do not match, so start the timer to turn them down
-				else this.getTurnDownTimer().start();
+				    this.getScoreCounter().increment(50);
+				}
+				// the cards do not match, so start the timer to turn them down and decrease 5 points
+				else {
+					this.getScoreCounter().increment(-5);
+					this.getTurnDownTimer().start();
+				}
 			}
 			return true;
 		}
@@ -88,7 +93,6 @@ public class EqualPairLevel extends EasyLevel {
 
 	@Override
 	public String getMode() {
-		// TODO Auto-generated method stub
 		return "MediumMode";
 	}
 
@@ -101,6 +105,5 @@ public class EqualPairLevel extends EasyLevel {
 
 		return true;
 	}
-
 
 }

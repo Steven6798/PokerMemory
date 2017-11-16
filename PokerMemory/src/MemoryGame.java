@@ -27,6 +27,7 @@ public class MemoryGame implements ActionListener {
 	private Container mainContentPane;			// frame that holds card field and turn counter
 	private TurnsTakenCounterLabel turnCounterLabel;
 	private GameLevel difficulty;
+	private ScoreCounterLabel scoreCounterLabel;
 
 	/**
 	 * Make a JMenuItem, associate an action command and listener, add to menu
@@ -47,7 +48,7 @@ public class MemoryGame implements ActionListener {
 	{
 
 		// Make toplevel window
-		this.mainFrame = new JFrame("Mr Fresh Memory Game");
+		this.mainFrame = new JFrame("UPRMHackers Memory Game");
 		this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.mainFrame.setSize(800,700);
 		this.mainContentPane = this.mainFrame.getContentPane();
@@ -130,20 +131,21 @@ public class MemoryGame implements ActionListener {
 	 */
 	public void newGame(String difficultyMode) throws IOException
 	{
-		// reset the turn counter to zero
+		// reset the turn and score counters to zero
 		this.turnCounterLabel = new TurnsTakenCounterLabel();
+		this.scoreCounterLabel = new ScoreCounterLabel();
 
 		// make a new card field with cards, and add it to the window
 
 		if(difficultyMode.equalsIgnoreCase("easy")) {
-			this.difficulty = new EasyLevel(this.turnCounterLabel, this.mainFrame);
+			this.difficulty = new EasyLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}
 		else if(difficultyMode.equalsIgnoreCase("medium")){
-			this.difficulty = new EqualPairLevel(this.turnCounterLabel, this.mainFrame);
+			this.difficulty = new EqualPairLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}
 
 		else if(difficultyMode.equalsIgnoreCase("trio")){
-			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.mainFrame);
+			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}
 
 		else {
@@ -151,14 +153,16 @@ public class MemoryGame implements ActionListener {
 		}
 
 		this.turnCounterLabel.reset();
+		this.scoreCounterLabel.reset();
 
 		// clear out the content pane (removes turn counter label and card field)
 		this.mainContentPane.removeAll();
 
 		this.mainContentPane.add(showCardDeck());
 
-		// add the turn counter label back in again
+		// add the turn and score counter label back in again
 		this.mainContentPane.add(this.turnCounterLabel);
+		this.mainContentPane.add(this.scoreCounterLabel);
 
 		// show the window (in case this is the first game)
 		this.mainFrame.setVisible(true);

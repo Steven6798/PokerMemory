@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
 import java.awt.Component;
+import java.awt.EventQueue;
+
 import javax.swing.Box;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -23,9 +25,14 @@ import java.awt.event.ActionEvent;
 
 public class MemoryFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8953942942328167118L;
 	private static final boolean DEBUG = true;
 	private JPanel contentPane;
 	private TurnsTakenCounterLabel turnCounterLabel;
+	private ScoreCounterLabel scoreCounterLabel;
 	private GameLevel difficulty;
 	private JPanel centerGrid;
 	private JLabel levelDescriptionLabel;
@@ -33,18 +40,18 @@ public class MemoryFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	//	public static void main(String[] args) {
-	//		EventQueue.invokeLater(new Runnable() {
-	//			public void run() {
-	//				try {
-	//					MemoryFrame frame = new MemoryFrame();
-	//					frame.setVisible(true);
-	//				} catch (Exception e) {
-	//					e.printStackTrace();
-	//				}
-	//			}
-	//		});
-	//	}
+		public static void main(String[] args) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						MemoryFrame frame = new MemoryFrame();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
 
 	/**
 	 * Create the frame.
@@ -144,16 +151,24 @@ public class MemoryFrame extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Points:");
 		panel_1.add(lblNewLabel_3);
 
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblNewLabel_2);
-
+		//JLabel lblNewLabel_2 = new JLabel("New label");
+		//lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		//panel_1.add(lblNewLabel_2);
+		
+		scoreCounterLabel = new ScoreCounterLabel();
+		scoreCounterLabel.setText("");
+		panel_1.add(scoreCounterLabel);
+		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		panel_1.add(horizontalStrut_3);
 	}
 
 	public TurnsTakenCounterLabel getTurnCounterLabel() {
 		return turnCounterLabel;
+	}
+	
+	public ScoreCounterLabel getScoreCounterLabel() {
+		return scoreCounterLabel;
 	}
 
 	public JPanel getCenterGrid() {
@@ -166,6 +181,10 @@ public class MemoryFrame extends JFrame {
 
 	public void setTurnCounterLabel(TurnsTakenCounterLabel turnCounterLabel) {
 		this.turnCounterLabel = turnCounterLabel;
+	}
+	
+	public void setScoreCounterLabel(ScoreCounterLabel scoreCounterLabel) {
+		this.scoreCounterLabel = scoreCounterLabel;
 	}
 
 	public void setCenterGrid(JPanel centerGrid) {
@@ -182,22 +201,23 @@ public class MemoryFrame extends JFrame {
 	 */
 	public void newGame(String difficultyMode) throws IOException
 	{
-		// Reset the turn counter label
+		// Reset the turn and score counter label
 		this.turnCounterLabel.reset();
+		this.scoreCounterLabel.reset();
 
 		// make a new card field with cards, and add it to the window
 
 		if(difficultyMode.equalsIgnoreCase("easy")) {
-			this.difficulty = new EasyLevel(this.turnCounterLabel, this);
+			this.difficulty = new EasyLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Easy Level");
 		}
 		else if(difficultyMode.equalsIgnoreCase("equalpair")){
-			this.difficulty = new EqualPairLevel(this.turnCounterLabel, this);
+			this.difficulty = new EqualPairLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Equal Pair Level");
 		}
 
 		else if(difficultyMode.equalsIgnoreCase("ranktrio")){
-			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this);
+			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Same Rank Trio Level");
 		}
 
