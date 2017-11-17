@@ -73,6 +73,7 @@ public class MemoryFrame extends JFrame {
 					if(e.getActionCommand().equals("Easy Level")) newGame("easy");
 					else if(e.getActionCommand().equals("Equal Pair Level")) newGame("equalpair");
 					else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("ranktrio");
+					else if(e.getActionCommand().equals("Flush Level")) newGame("flush");
 					else if(e.getActionCommand().equals("How To Play")) showInstructions();
 					else if(e.getActionCommand().equals("About")) showAbout();
 					else if(e.getActionCommand().equals("Exit")) System.exit(0);
@@ -93,6 +94,10 @@ public class MemoryFrame extends JFrame {
 		JMenuItem sameRankTrioMenuItem = new JMenuItem("Same Rank Trio Level");
 		sameRankTrioMenuItem.addActionListener(menuHandler);		
 		mnFile.add(sameRankTrioMenuItem);
+		
+		JMenuItem flushMenuItem = new JMenuItem("Flush Level");
+		flushMenuItem.addActionListener(menuHandler);		
+		mnFile.add(flushMenuItem);
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
@@ -219,6 +224,11 @@ public class MemoryFrame extends JFrame {
 			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Same Rank Trio Level");
 		}
+		
+		else if(difficultyMode.equalsIgnoreCase("flush")) {
+			this.difficulty = new FlushLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
+			this.getLevelDescriptionLabel().setText("Flush Level");
+		}
 
 		else {
 			throw new RuntimeException("Illegal Game Level Detected");
@@ -280,12 +290,27 @@ public class MemoryFrame extends JFrame {
 						"Click on three cards to turn them face up. If the cards have the \r\n"+
 						"same rank, then you have discovered a trio.  The trio will remain\r\n"+
 						"turned up.  If the cards are different, they will flip back\r\n"+
-						"over automatically after a short delay.  Continue flipping\r\n"+
-						"cards until you have discovered all of the pairs.  The game\r\n"+
-						"is won when all cards are face up.\r\n"+
+						"over automatically after a short delay.  The game is won\r\n"+
+						"when you have discovered every trio. \r\n"+
 						"\r\n"+
-						"Each time you flip two cards up, the turn counter will\r\n"+
+						"Each time you flip three cards up, the turn counter will\r\n"+
+						"increase.  Try to win the game in the fewest number of turns! \r\n" +
+						"\r\n"+
+						"FLUSH Level\r\n"+
+						"The game consists of a grid of distinct cards.  At the start of the game,\r\n"+
+						"every card is face down.  The object is to find all the quintets \r\n"+
+						"of cards with the same suit and turn them face up.\r\n"+
+						"\r\n"+
+						"Click on five cards to turn them face up. If the cards have the \r\n"+
+						"same suit, then you have discovered a quintet.  The quintet will remain\r\n"+
+						"turned up.  If the cards are different, they will flip back\r\n"+
+						"over automatically after a short delay.  The game is won\r\n"+
+						"when you have discovered every quintet. \r\n"+
+						"\r\n"+
+						"Each time you flip five cards up, the turn counter will\r\n"+
 						"increase.  Try to win the game in the fewest number of turns!";
+		
+						
 
 		JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT
 				, "How To Play", JOptionPane.PLAIN_MESSAGE);

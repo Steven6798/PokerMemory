@@ -65,7 +65,7 @@ public class RankTrioLevel extends EqualPairLevel {
 					// Three cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
 					int rankValue = card.getRankValue();
-					this.getScoreCounter().increment(100 + (rankValue*3));
+					this.getScoreCounter().increment(100 + (rankValue * 3));
 				}
 				else {
 					// The cards do not match, so start the timer to turn them down
