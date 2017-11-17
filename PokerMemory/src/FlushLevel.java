@@ -1,23 +1,14 @@
-/**
- * Stores currently turned cards, allows only three cards to be uncovered on each turn
- * Also handles turning cards back down after a delay if cards have different ranks
- *
- * @author Michael Leonhard (Original Author)
- * @author Modified by Bienvenido Vélez (UPRM)
- * @version Sept 2017
- */
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-public class RankTrioLevel extends EqualPairLevel {
+public class FlushLevel extends RankTrioLevel {
 
 	// TRIO LEVEL: The goal is to find, on each turn, three cards with the same rank
 
-	protected RankTrioLevel(TurnsTakenCounterLabel validTurnTime, ScoreCounterLabel scoreCounter, JFrame mainFrame) {
+	protected FlushLevel(TurnsTakenCounterLabel validTurnTime, ScoreCounterLabel scoreCounter, JFrame mainFrame) {
 		super(validTurnTime, scoreCounter, mainFrame);
-		this.getTurnsTakenCounter().setDifficultyModeLabel("Trio Level");
-		this.setCardsToTurnUp(3);
+		this.getTurnsTakenCounter().setDifficultyModeLabel("Flush Level");
+		this.setCardsToTurnUp(5);
 		this.setCardsPerRow(10);
 		this.setRowsPerGrid(5);
 	}
@@ -61,11 +52,18 @@ public class RankTrioLevel extends EqualPairLevel {
 				// get the other card (which was already turned up)
 				Card otherCard1 = (Card) this.getTurnedCardsBuffer().get(0);
 				Card otherCard2 = (Card) this.getTurnedCardsBuffer().get(1);
-				if((card.getRank().equals(otherCard1.getRank())) && (card.getRank().equals(otherCard2.getRank()))) {
+				Card otherCard3 = (Card) this.getTurnedCardsBuffer().get(2);
+				Card otherCard4 = (Card) this.getTurnedCardsBuffer().get(3);
+				if((card.getSuit().equals(otherCard1.getSuit())) && (card.getSuit().equals(otherCard2.getSuit())) && (card.getSuit().equals(otherCard3.getSuit())) && (card.getSuit().equals(otherCard4.getSuit())))  {
 					// Three cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
-					int rankValue = card.getRankValue();
-					this.getScoreCounter().increment(100 + (rankValue*3));
+					int rankValue1 = card.getRankValue();
+					int rankValue2 = otherCard1.getRankValue();
+					int rankValue3 = otherCard2.getRankValue();
+					int rankValue4 = otherCard3.getRankValue();
+					int rankValue5 = otherCard4.getRankValue();
+					this.getScoreCounter().increment(700 + rankValue1 + rankValue2 + rankValue3 + rankValue4 + rankValue5);
+					
 				}
 				else {
 					// The cards do not match, so start the timer to turn them down
