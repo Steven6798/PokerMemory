@@ -67,6 +67,7 @@ public class MemoryGame implements ActionListener {
 		newMenuItem("Easy Level", difficultyMenu, this);
 		newMenuItem("Equal Pair Level", difficultyMenu, this);
 		newMenuItem("Same Rank Trio Level", difficultyMenu, this);
+		newMenuItem("Flush Level", difficultyMenu, this);
 
 		// Help menu
 		JMenu helpMenu = new JMenu("Help");
@@ -89,6 +90,7 @@ public class MemoryGame implements ActionListener {
 			if(e.getActionCommand().equals("Easy Level")) newGame("easy");
 			else if(e.getActionCommand().equals("Equal Pair Level")) newGame("medium");
 			else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("trio");
+			else if(e.getActionCommand().equals("Flush Level")) newGame("flush");
 			else if(e.getActionCommand().equals("How To Play")) showInstructions();
 			else if(e.getActionCommand().equals("About")) showAbout();
 			else if(e.getActionCommand().equals("Exit")) System.exit(0);
@@ -140,6 +142,10 @@ public class MemoryGame implements ActionListener {
 
 		else if(difficultyMode.equalsIgnoreCase("trio")) {
 			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
+		}
+		
+		else if(difficultyMode.equalsIgnoreCase("flush")) {
+			this.difficulty = new FlushLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}
 
 		else {
