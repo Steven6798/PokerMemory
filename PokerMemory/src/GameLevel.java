@@ -51,8 +51,7 @@ public abstract class GameLevel implements ActionListener {
 	 *
 	 * @param validTurnTime reference to turn counter label in main program window
 	 */
-	protected GameLevel(TurnsTakenCounterLabel counterLabel, int cardsToGuess, ScoreCounterLabel scoreCounter, JFrame mainFrame)
-	{
+	protected GameLevel(TurnsTakenCounterLabel counterLabel, int cardsToGuess, ScoreCounterLabel scoreCounter, JFrame mainFrame) {
 		this.turnsTakenCounter = counterLabel; counterLabel.reset();
 		this.scoreCounter = scoreCounter; scoreCounter.reset();
 		this.turnedCardsBuffer= new Vector<Card>(cardsToGuess);
@@ -129,7 +128,6 @@ public abstract class GameLevel implements ActionListener {
 
 	/**
 	 * Selects and adds the cards that will fill the grid according to the requirements of each level
-	 *
 	 */
 	protected abstract void makeDeck();
 
@@ -146,11 +144,9 @@ public abstract class GameLevel implements ActionListener {
 	 *
 	 * @param e the timer event information
 	 */
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		// turn each card back down
-		for(int i = 0; i < this.turnedCardsBuffer.size(); i++ )
-		{
+		for(int i = 0; i < this.turnedCardsBuffer.size(); i++ ) {
 			Card card = (Card)this.turnedCardsBuffer.get(i);
 			card.turnDown();
 		}
@@ -160,7 +156,6 @@ public abstract class GameLevel implements ActionListener {
 	
 	/**
 	 * Returns true if game is over. False otherwise.
-	 * 
 	 */
 	protected abstract boolean  isGameOver();
 	
@@ -171,14 +166,12 @@ public abstract class GameLevel implements ActionListener {
 
 		this.cardIcons = new ImageIcon[TotalCardsPerDeck+1];
 
-		for(int i = 0; i < TotalCardsPerDeck+1; i++ )
-		{
+		for(int i = 0; i < TotalCardsPerDeck+1; i++ ) {
 			// make a new icon from a cardX.gif file
 			String fileName = "images/cards/" + cardNames[i] + ".gif";
 			this.cardIcons[i] = new ImageIcon(fileName);
 			// unable to load icon
-			if(this.cardIcons[i].getImageLoadStatus() == MediaTracker.ERRORED)
-			{
+			if(this.cardIcons[i].getImageLoadStatus() == MediaTracker.ERRORED) {
 				// inform the user of the error and then quit
 				JOptionPane.showMessageDialog(this.mainFrame
 						, "The image " + fileName + " could not be loaded."
@@ -189,12 +182,10 @@ public abstract class GameLevel implements ActionListener {
 		//return this.cardIcons;
 	}
 
-	protected  void randomizeIntArray(int[] a){
-		// TODO Auto-generated method stub
+	protected  void randomizeIntArray(int[] a) {
 		Random randomizer = new Random();
 		// iterate over the array
-		for(int i = 0; i < a.length; i++ )
-		{
+		for(int i = 0; i < a.length; i++ ) {
 			// choose a random int to swap with
 			int d = randomizer.nextInt(a.length);
 			// swap the entries

@@ -35,8 +35,7 @@ public class EqualPairLevel extends EasyLevel {
 
 		int chosenCount = 0;
 		Random rand = new Random();
-		while (chosenCount < totalUniqueCards)
-		{
+		while (chosenCount < totalUniqueCards) {
 			int nextCardNo = rand.nextInt(getTotalCardsPerDeck());
 			if (!cardChosen[nextCardNo]) {
 				cardChosen[nextCardNo] = true;
@@ -50,8 +49,7 @@ public class EqualPairLevel extends EasyLevel {
 		this.randomizeIntArray(cardsToAdd);
 
 		// make each card object and add it to the game grid
-		for(int i = 0; i < cardsToAdd.length; i++)
-		{
+		for(int i = 0; i < cardsToAdd.length; i++) {
 			// number of the card, randomized
 			int num = cardsToAdd[i];
 			// make the card object and add it to the panel
@@ -64,11 +62,9 @@ public class EqualPairLevel extends EasyLevel {
 	@Override
 	protected boolean turnUp(Card card) {
 		// the card may be turned
-		if(this.getTurnedCardsBuffer().size() < getCardsToTurnUp()) 
-		{
+		if(this.getTurnedCardsBuffer().size() < getCardsToTurnUp()) {
 			this.getTurnedCardsBuffer().add(card);
-			if(this.getTurnedCardsBuffer().size() == getCardsToTurnUp())
-			{
+			if(this.getTurnedCardsBuffer().size() == getCardsToTurnUp()) {
 				// there are two cards faced up
 				// record the player's turn
 				this.getTurnsTakenCounter().increment();
@@ -97,12 +93,12 @@ public class EqualPairLevel extends EasyLevel {
 	}
 
 	@Override
-	protected boolean  isGameOver(){
-
-		for (int i =0; i< this.getGrid().size();i++)
-			if(!this.getGrid().get(i).isFaceUp()) return false;
-
-
+	protected boolean  isGameOver() {
+		for (int i =0; i< this.getGrid().size();i++) {
+			if(!this.getGrid().get(i).isFaceUp()) {
+				return false;
+			}
+		}
 		return true;
 	}
 

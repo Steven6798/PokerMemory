@@ -39,8 +39,7 @@ public class EasyLevel extends GameLevel {
 
 		int chosenCount = 0;
 		Random rand = new Random();
-		while (chosenCount < totalUniqueCards)
-		{
+		while (chosenCount < totalUniqueCards) {
 			int nextCardNo = rand.nextInt(getTotalCardsPerDeck());
 			if (!cardChosen[nextCardNo]) {
 				cardChosen[nextCardNo] = true;
@@ -53,8 +52,7 @@ public class EasyLevel extends GameLevel {
 		this.randomizeIntArray(cardsToAdd);
 
 		// make each card object and add it to the game grid
-		for(int i = 0; i < cardsToAdd.length; i++)
-		{
+		for(int i = 0; i < cardsToAdd.length; i++) {
 			// number of the card, randomized
 			int num = cardsToAdd[i];
 			// make the card object and add it to the panel
@@ -68,8 +66,7 @@ public class EasyLevel extends GameLevel {
 	protected boolean turnUp(Card card) {
 		// Turn up any card until all are turned up
 		this.getMainFrame().getTurnCounterLabel().setText("5");
-		if(this.getTurnedCardsBuffer().size() < this.getTotalUniqueCards()) 
-		{
+		if(this.getTurnedCardsBuffer().size() < this.getTotalUniqueCards()) {
 			this.getTurnsTakenCounter().increment();
 			this.getTurnedCardsBuffer().add(card);
 			return true;
@@ -80,24 +77,16 @@ public class EasyLevel extends GameLevel {
 
 	@Override
 	public String getMode() {
-		// TODO Auto-generated method stub
 		return "EasyMode";
 	}
 	
 	@Override
-	protected boolean  isGameOver()
-	{
-		for (int i =0; i< this.getGrid().size();i++)
-			if(!this.getGrid().get(i).isFaceUp()) return false;
-
+	protected boolean  isGameOver() {
+		for (int i =0; i< this.getGrid().size();i++) {
+			if(!this.getGrid().get(i).isFaceUp()) {
+				return false;
+			}
+		}
 		return true;
 	}
 }
-
-
-
-
-
-
-
-

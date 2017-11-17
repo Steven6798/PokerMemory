@@ -32,8 +32,7 @@ public class MemoryGame implements ActionListener {
 	/**
 	 * Make a JMenuItem, associate an action command and listener, add to menu
 	 */
-	private static void newMenuItem(String text, JMenu menu, ActionListener listener)
-	{
+	private static void newMenuItem(String text, JMenu menu, ActionListener listener) {
 		JMenuItem newItem = new JMenuItem(text);
 		newItem.setActionCommand(text);
 		newItem.addActionListener(listener);
@@ -44,8 +43,7 @@ public class MemoryGame implements ActionListener {
 	 * Default constructor loads card images, makes window
 	 * @throws IOException 
 	 */
-	public MemoryGame () throws IOException
-	{
+	public MemoryGame () throws IOException {
 
 		// Make toplevel window
 		this.mainFrame = new JFrame("UPRMHackers Memory Game");
@@ -81,12 +79,11 @@ public class MemoryGame implements ActionListener {
 
 
 	/**
-	 * Handles menu events.  Necessary for implementing ActionListener.
+	 * Handles menu events. Necessary for implementing ActionListener.
 	 *
 	 * @param e object with information about the event
 	 */
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		dprintln("actionPerformed " + e.getActionCommand());
 		try {
 			if(e.getActionCommand().equals("Easy Level")) newGame("easy");
@@ -106,20 +103,18 @@ public class MemoryGame implements ActionListener {
 	 *
 	 * @param message the string to print to the console
 	 */
-	static public void dprintln( String message )
-	{
+	static public void dprintln( String message ) {
 		if (DEBUG) System.out.println( message );
 	}
 
-	public JPanel showCardDeck()
-	{
+	public JPanel showCardDeck() {
 		// make the panel to hold all of the cards
 		JPanel panel = new JPanel(new GridLayout(difficulty.getRowsPerGrid(),difficulty.getCardsPerRow()));
 
 		// this set of cards must have their own manager
 		this.difficulty.makeDeck();
 
-		for(int i= 0; i<difficulty.getGrid().size();i++){
+		for(int i= 0; i<difficulty.getGrid().size();i++) {
 			panel.add(difficulty.getGrid().get(i));
 		}
 		return panel;
@@ -129,8 +124,7 @@ public class MemoryGame implements ActionListener {
 	 * Prepares a new game (first game or non-first game)
 	 * @throws IOException 
 	 */
-	public void newGame(String difficultyMode) throws IOException
-	{
+	public void newGame(String difficultyMode) throws IOException {
 		// reset the turn and score counters to zero
 		this.turnCounterLabel = new TurnsTakenCounterLabel();
 		this.scoreCounterLabel = new ScoreCounterLabel();
@@ -140,11 +134,11 @@ public class MemoryGame implements ActionListener {
 		if(difficultyMode.equalsIgnoreCase("easy")) {
 			this.difficulty = new EasyLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}
-		else if(difficultyMode.equalsIgnoreCase("medium")){
+		else if(difficultyMode.equalsIgnoreCase("medium")) {
 			this.difficulty = new EqualPairLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}
 
-		else if(difficultyMode.equalsIgnoreCase("trio")){
+		else if(difficultyMode.equalsIgnoreCase("trio")) {
 			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}
 
@@ -168,15 +162,14 @@ public class MemoryGame implements ActionListener {
 		this.mainFrame.setVisible(true);
 	}
 
-	public boolean gameOver() throws FileNotFoundException, InterruptedException{
+	public boolean gameOver() throws FileNotFoundException, InterruptedException {
 		return difficulty.isGameOver();
 	}
 
 	/**
 	 * Shows an instructional dialog box to the user
 	 */
-	private void showInstructions()
-	{
+	private void showInstructions() {
 		dprintln("MemoryGame.showInstructions()");
 		final String HOWTOPLAYTEXT = 
 				"How To Play\r\n" +
@@ -215,19 +208,11 @@ public class MemoryGame implements ActionListener {
 	/**
 	 * Shows an dialog box with information about the program
 	 */
-	private void showAbout()
-	{
+	private void showAbout() {
 		dprintln("MemoryGame.showAbout()");
 		final String ABOUTTEXT = "Game Customized at UPRM. Originally written by Mike Leonhard";
 
 		JOptionPane.showMessageDialog(this.mainFrame, ABOUTTEXT
 				, "About Memory Game", JOptionPane.PLAIN_MESSAGE);
 	}
-
-
 }
-
-
-
-
-

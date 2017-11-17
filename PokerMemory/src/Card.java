@@ -9,8 +9,7 @@
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Card extends JLabel implements MouseListener
-{
+public class Card extends JLabel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 
 	private GameLevel turnedManager;
@@ -32,8 +31,7 @@ public class Card extends JLabel implements MouseListener
 	 * @param rank card rank in String form (e.g. "2", "q", "a", etc.)
 	 * @param suit card suit in String form could be one of "c" (clubs), "d" (diamonds), "h" (hearts), or "s" (spades) 
 	 */
-	public Card(GameLevel turnedManager, Icon face, Icon back, int num, String rank, String suit)
-	{
+	public Card(GameLevel turnedManager, Icon face, Icon back, int num, String rank, String suit) {
 		// initially show face down
 		super(back);
 		// save parameters
@@ -49,6 +47,24 @@ public class Card extends JLabel implements MouseListener
 		this.iconWidthHalf = back.getIconWidth() / 2;
 		this.iconHeightHalf = back.getIconHeight() / 2;
 	}
+	
+	public int getRankValue() {
+		if (this.rank.equals("a")) {
+			return 20;
+		}
+		else if(this.rank.equals("k")) {
+			return 13;
+		}
+		else if (this.rank.equals("q")) {
+			return 12;
+		}
+		else if(this.rank.equals("j")) {
+			return 11;
+		}
+		else {
+			return 0;
+		}
+	}
 
 	// Getters
 
@@ -61,8 +77,7 @@ public class Card extends JLabel implements MouseListener
 	/**
 	 * Try to turn card face up
 	 */
-	public void turnUp()
-	{
+	public void turnUp() {
 		MemoryGame.dprintln("Card["+num+"].turnUp()");
 		// the card is already face up
 		if(this.faceUp) return;
@@ -76,8 +91,7 @@ public class Card extends JLabel implements MouseListener
 	 * Turn card back over, face down. Usually after timer expires
 	 *
 	 */
-	public void turnDown()
-	{
+	public void turnDown() {
 		MemoryGame.dprintln("Card["+num+"].turnDown()");
 		if(!this.faceUp) return;
 		this.setIcon(this.backIcon);
@@ -86,19 +100,19 @@ public class Card extends JLabel implements MouseListener
 
 	/**
 	 * Check if the coordinates are over the icon
-	 *
+	 * 
 	 * @param x X coordinate
 	 * @param y Y coordinate
 	 * @return true if coordinates are over icon, otherwise false
 	 */
-	private boolean overIcon(int x, int y)
-	{
+	private boolean overIcon(int x, int y) {
 		// calculate the distance from the center of the label
 		int distX = Math.abs(x - (this.getWidth() / 2));
 		int distY = Math.abs(y - (this.getHeight() / 2));
 		// outside icon region
-		if(distX > this.iconWidthHalf || distY > this.iconHeightHalf )
+		if(distX > this.iconWidthHalf || distY > this.iconHeightHalf ) {
 			return false;
+		}
 		// inside icon region
 		return true;
 	}
@@ -111,11 +125,10 @@ public class Card extends JLabel implements MouseListener
 
 	/**
 	 * Invoked when the mouse button has been clicked (pressed and released) on a component.
-	 *
+	 * 
 	 * @param e object holding information about the button click
 	 */
-	public void mouseClicked(MouseEvent e)
-	{
+	public void mouseClicked(MouseEvent e) {
 		// over icon, so try to turn up the card
 		System.out.println("Mouse clicked");
 		if(overIcon(e.getX(), e.getY())) this.turnUp();
@@ -126,8 +139,7 @@ public class Card extends JLabel implements MouseListener
 	 *
 	 * @param e object holding information about the button press
 	 */
-	public void mousePressed(MouseEvent e)
-	{
+	public void mousePressed(MouseEvent e) {
 		// over icon, so remember this is a mouse press
 		if(overIcon(e.getX(), e.getY())) this.mousePressedOnMe = true;
 	}
@@ -137,11 +149,9 @@ public class Card extends JLabel implements MouseListener
 	 *
 	 * @param e object holding information about the button release
 	 */
-	public void mouseReleased(MouseEvent e)
-	{
+	public void mouseReleased(MouseEvent e) {
 		// previous press was over icon
-		if(this.mousePressedOnMe)
-		{
+		if(this.mousePressedOnMe) {
 			// mouse is no longer pressed
 			this.mousePressedOnMe = false;
 			// it was a click, so treat it as one
@@ -161,9 +171,10 @@ public class Card extends JLabel implements MouseListener
 	 *
 	 * @param e object holding information about the mouse pointer
 	 */
-	public void mouseExited(MouseEvent e)
-	{
+	public void mouseExited(MouseEvent e) {
 		// forget any previous mouse press
 		this.mousePressedOnMe = false;
 	}
+	
+	
 }

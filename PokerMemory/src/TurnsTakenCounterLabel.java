@@ -8,8 +8,7 @@
 
 import javax.swing.JLabel;
 
-public class TurnsTakenCounterLabel extends JLabel
-{
+public class TurnsTakenCounterLabel extends JLabel {
 	/**
 	 * 
 	 */
@@ -19,47 +18,42 @@ public class TurnsTakenCounterLabel extends JLabel
 	private int numTurns = 0;
 	//private  String DESCRIPTION;
 	
-	public TurnsTakenCounterLabel()
-	{
+	/**
+	 * Default constructor, starts counter at 0
+	 */
+	public TurnsTakenCounterLabel() {
 		super();
 		reset();
 	}
 	
-	public void setDifficultyModeLabel(String difficultyMode){
+	public void setDifficultyModeLabel(String difficultyMode) {
 		//DESCRIPTION = "Turns Taken: ";
 		//setHorizontalTextPosition(JLabel.LEFT);
 	}
 	
-	public int getNumOfTurns(){
+	public int getNumOfTurns() {
 		return this.numTurns;
-		}
+	}
 	
 	/**
 	 * Update the text label with the current counter value
-	*/
-	private void update()
-	{
+	 */
+	private void update() {
 		this.setText("" + this.getNumOfTurns());
 	}
 	
 	/**
-	 * Default constructor, starts counter at 0
-	*/
-	
-	/**
 	 * Increments the counter and updates the text label
-	*/
-	public void increment()
-	{
+	 */
+	public void increment() {
 		this.numTurns++;
 		update();
 	}
 	
 	/**
 	 * Resets the counter to zero and updates the text label
-	*/
-	public void reset()
-	{
+	 */
+	public void reset() {
 		this.numTurns = 0;
 		update();
 	}

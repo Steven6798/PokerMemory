@@ -199,8 +199,7 @@ public class MemoryFrame extends JFrame {
 	 * Prepares a new game (first game or non-first game)
 	 * @throws IOException 
 	 */
-	public void newGame(String difficultyMode) throws IOException
-	{
+	public void newGame(String difficultyMode) throws IOException {
 		// Reset the turn and score counter label
 		this.turnCounterLabel.reset();
 		this.scoreCounterLabel.reset();
@@ -211,12 +210,12 @@ public class MemoryFrame extends JFrame {
 			this.difficulty = new EasyLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Easy Level");
 		}
-		else if(difficultyMode.equalsIgnoreCase("equalpair")){
+		else if(difficultyMode.equalsIgnoreCase("equalpair")) {
 			this.difficulty = new EqualPairLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Equal Pair Level");
 		}
 
-		else if(difficultyMode.equalsIgnoreCase("ranktrio")){
+		else if(difficultyMode.equalsIgnoreCase("ranktrio")) {
 			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Same Rank Trio Level");
 		}
@@ -236,29 +235,27 @@ public class MemoryFrame extends JFrame {
 		this.setVisible(true);
 	}
 	
-	public JPanel showCardDeck()
-	{
+	public JPanel showCardDeck() {
 		// make the panel to hold all of the cards
 		JPanel panel = new JPanel(new GridLayout(difficulty.getRowsPerGrid(),difficulty.getCardsPerRow()));
 
 		// this set of cards must have their own manager
 		this.difficulty.makeDeck();
 
-		for(int i= 0; i<difficulty.getGrid().size();i++){
+		for(int i= 0; i<difficulty.getGrid().size();i++) {
 			panel.add(difficulty.getGrid().get(i));
 		}
 		return panel;
 	}
 	
-	public boolean gameOver() throws FileNotFoundException, InterruptedException{
+	public boolean gameOver() throws FileNotFoundException, InterruptedException {
 		return difficulty.isGameOver();
 	}
 
 	/**
 	 * Shows an instructional dialog box to the user
 	 */
-	private void showInstructions()
-	{
+	private void showInstructions() {
 		dprintln("MemoryGame.showInstructions()");
 		final String HOWTOPLAYTEXT = 
 				"How To Play\r\n" +
@@ -297,8 +294,7 @@ public class MemoryFrame extends JFrame {
 	/**
 	 * Shows an dialog box with information about the program
 	 */
-	private void showAbout()
-	{
+	private void showAbout() {
 		dprintln("MemoryGame.showAbout()");
 		final String ABOUTTEXT = "Game Customized at UPRM. Originally written by Mike Leonhard";
 
@@ -310,8 +306,7 @@ public class MemoryFrame extends JFrame {
 	 *
 	 * @param message the string to print to the console
 	 */
-	static public void dprintln( String message )
-	{
+	static public void dprintln( String message ) {
 		if (DEBUG) System.out.println( message );
 	}
 }

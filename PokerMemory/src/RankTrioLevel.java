@@ -30,8 +30,7 @@ public class RankTrioLevel extends EqualPairLevel {
 		ImageIcon backIcon = this.getCardIcons()[this.getTotalCardsPerDeck()];
 
 		int cardsToAdd[] = new int[getRowsPerGrid() * getCardsPerRow()];
-		for(int i = 0; i < (getRowsPerGrid() * getCardsPerRow()); i++)
-		{
+		for(int i = 0; i < (getRowsPerGrid() * getCardsPerRow()); i++) {
 			cardsToAdd[i] = i;
 		}
 
@@ -39,8 +38,7 @@ public class RankTrioLevel extends EqualPairLevel {
 		this.randomizeIntArray(cardsToAdd);
 
 		// make each card object
-		for(int i = 0; i < cardsToAdd.length; i++)
-		{
+		for(int i = 0; i < cardsToAdd.length; i++) {
 			// number of the card, randomized
 			int num = cardsToAdd[i];
 			// make the card object and add it to the panel
@@ -53,12 +51,10 @@ public class RankTrioLevel extends EqualPairLevel {
 	@Override
 	protected boolean turnUp(Card card) {
 		// the card may be turned
-		if(this.getTurnedCardsBuffer().size() < getCardsToTurnUp()) 
-		{
+		if(this.getTurnedCardsBuffer().size() < getCardsToTurnUp()) {
 			// add the card to the list
 			this.getTurnedCardsBuffer().add(card);
-			if(this.getTurnedCardsBuffer().size() == getCardsToTurnUp())
-			{
+			if(this.getTurnedCardsBuffer().size() == getCardsToTurnUp()) {
 				// We are uncovering the last card in this turn
 				// Record the player's turn
 				this.getTurnsTakenCounter().increment();
@@ -68,11 +64,13 @@ public class RankTrioLevel extends EqualPairLevel {
 				if((card.getRank().equals(otherCard1.getRank())) && (card.getRank().equals(otherCard2.getRank()))) {
 					// Three cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
+					int rankValue = card.getRankValue();
+					this.getScoreCounter().increment(100 + rankValue);
 				}
-				else
-				{
+				else {
 					// The cards do not match, so start the timer to turn them down
 					this.getTurnDownTimer().start();
+					this.getScoreCounter().increment(-5);
 				}
 			}
 			return true;
