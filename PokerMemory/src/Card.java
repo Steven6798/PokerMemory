@@ -62,7 +62,8 @@ public class Card extends JLabel implements MouseListener {
 			return 11;
 		}
 		else {
-			return 0;
+			
+			return Integer.valueOf(this.rank);
 		}
 	}
 
