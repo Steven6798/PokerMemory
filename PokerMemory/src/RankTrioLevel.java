@@ -77,4 +77,9 @@ public class RankTrioLevel extends EqualPairLevel {
 		}
 		return false;
 	}
+	
+	@Override
+	public String getMode() {
+		return "TrioMode";
+	}
 }

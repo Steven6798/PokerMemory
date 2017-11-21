@@ -74,6 +74,7 @@ public class MemoryFrame extends JFrame {
 					else if(e.getActionCommand().equals("Equal Pair Level")) newGame("equalpair");
 					else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("ranktrio");
 					else if(e.getActionCommand().equals("Flush Level")) newGame("flush");
+					else if(e.getActionCommand().equals("Combo Level")) newGame("combo");
 					else if(e.getActionCommand().equals("How To Play")) showInstructions();
 					else if(e.getActionCommand().equals("About")) showAbout();
 					else if(e.getActionCommand().equals("Exit")) System.exit(0);
@@ -98,6 +99,10 @@ public class MemoryFrame extends JFrame {
 		JMenuItem flushMenuItem = new JMenuItem("Flush Level");
 		flushMenuItem.addActionListener(menuHandler);		
 		mnFile.add(flushMenuItem);
+		
+		JMenuItem comboMenuItem = new JMenuItem("Combo Level");
+		comboMenuItem.addActionListener(menuHandler);		
+		mnFile.add(comboMenuItem);
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
@@ -219,15 +224,17 @@ public class MemoryFrame extends JFrame {
 			this.difficulty = new EqualPairLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Equal Pair Level");
 		}
-
 		else if(difficultyMode.equalsIgnoreCase("ranktrio")) {
 			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Same Rank Trio Level");
 		}
-		
 		else if(difficultyMode.equalsIgnoreCase("flush")) {
 			this.difficulty = new FlushLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Flush Level");
+		}
+		else if(difficultyMode.equalsIgnoreCase("combo")) {
+			this.difficulty = new FlushLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
+			this.getLevelDescriptionLabel().setText("Combo Level");
 		}
 
 		else {
@@ -235,6 +242,7 @@ public class MemoryFrame extends JFrame {
 		}
 
 		this.turnCounterLabel.reset();
+		this.scoreCounterLabel.reset();
 
 		// clear out the content pane (removes turn counter label and card field)
 		BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();

@@ -20,7 +20,6 @@ public class GameManager {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws InterruptedException, IOException {
-		// TODO Auto-generated method stub
 		// make an instance of the main game class
 
 		int playMore = 2;

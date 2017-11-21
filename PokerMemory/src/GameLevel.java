@@ -75,7 +75,7 @@ public abstract class GameLevel implements ActionListener {
 	public ScoreCounterLabel getScoreCounter() { return scoreCounter; }
 	public Timer getTurnDownTimer()            { return turnDownTimer; }
 	public ImageIcon[] getCardIcons()          { return cardIcons;     }
-	public MemoryFrame getMainFrame() { return mainFrame; }
+	public MemoryFrame getMainFrame() 		   { return mainFrame; }
 
 	// Setters
 	public void setTurnedCardsBuffer(Vector<Card> turnedCardsBuffer) {
