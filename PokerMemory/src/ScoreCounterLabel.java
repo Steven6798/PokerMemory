@@ -8,7 +8,7 @@ public class ScoreCounterLabel extends JLabel {
 	
 	// data fields
 	private int score = 0;
-	private  String DESCRIPTION;
+	//private String DESCRIPTION;
 	
 	/**
 	 * Default constructor, starts counter at 0
@@ -19,11 +19,11 @@ public class ScoreCounterLabel extends JLabel {
 	}
 	
 	public void setDifficultyModeLabel(String difficultyMode) {
-		DESCRIPTION = "Score: ";
-		setHorizontalTextPosition(JLabel.LEFT);
+		//DESCRIPTION = "Score: ";
+		//setHorizontalTextPosition(JLabel.RIGHT);
 	}
 	
-	public int getNumOfTurns() {
+	public int getScore() {
 		return this.score;
 	}
 	
@@ -31,7 +31,7 @@ public class ScoreCounterLabel extends JLabel {
 	 * Update the text label with the current counter value
 	 */
 	private void update() {
-		this.setText(DESCRIPTION + Integer.toString(this.score));
+		this.setText("Score: " + this.getScore());
 	}
 	
 	/**

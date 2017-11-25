@@ -75,6 +75,7 @@ public class MemoryFrame extends JFrame {
 					else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("ranktrio");
 					else if(e.getActionCommand().equals("Flush Level")) newGame("flush");
 					else if(e.getActionCommand().equals("Combo Level")) newGame("combo");
+					else if(e.getActionCommand().equals("Four of a kind Level")) newGame("fourkind");
 					else if(e.getActionCommand().equals("How To Play")) showInstructions();
 					else if(e.getActionCommand().equals("About")) showAbout();
 					else if(e.getActionCommand().equals("Exit")) System.exit(0);
@@ -103,6 +104,10 @@ public class MemoryFrame extends JFrame {
 		JMenuItem comboMenuItem = new JMenuItem("Combo Level");
 		comboMenuItem.addActionListener(menuHandler);		
 		mnFile.add(comboMenuItem);
+		
+		JMenuItem fourKindMenuItem = new JMenuItem("Four of a kind Level");
+		fourKindMenuItem.addActionListener(menuHandler);		
+		mnFile.add(fourKindMenuItem);
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
@@ -142,8 +147,8 @@ public class MemoryFrame extends JFrame {
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		panel_1.add(horizontalStrut_2);
 
-		JLabel lblNewLabel = new JLabel("Clicks:");
-		panel_1.add(lblNewLabel);
+//		JLabel lblNewLabel = new JLabel("Turns:");
+//		panel_1.add(lblNewLabel);
 		
 		turnCounterLabel = new TurnsTakenCounterLabel();
 		turnCounterLabel.setText("");
@@ -152,18 +157,15 @@ public class MemoryFrame extends JFrame {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue);
 		
-		levelDescriptionLabel = new JLabel("New label");
+		levelDescriptionLabel = new JLabel("Level");
 		panel_1.add(levelDescriptionLabel);
 		
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 
-		JLabel lblNewLabel_3 = new JLabel("Points:");
-		panel_1.add(lblNewLabel_3);
-
-		//JLabel lblNewLabel_2 = new JLabel("New label");
-		//lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		//panel_1.add(lblNewLabel_2);
+//		JLabel lblNewLabel_2 = new JLabel("Points:");
+//		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+//		panel_1.add(lblNewLabel_2);
 		
 		scoreCounterLabel = new ScoreCounterLabel();
 		scoreCounterLabel.setText("");
@@ -233,10 +235,13 @@ public class MemoryFrame extends JFrame {
 			this.getLevelDescriptionLabel().setText("Flush Level");
 		}
 		else if(difficultyMode.equalsIgnoreCase("combo")) {
-			this.difficulty = new FlushLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
+			this.difficulty = new ComboLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Combo Level");
 		}
-
+		else if(difficultyMode.equalsIgnoreCase("fourkind")) {
+			this.difficulty = new FourOfAKindLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
+			this.getLevelDescriptionLabel().setText("Four of a kind Level");
+		}
 		else {
 			throw new RuntimeException("Illegal Game Level Detected");
 		}

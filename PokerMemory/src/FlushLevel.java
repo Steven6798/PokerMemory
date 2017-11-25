@@ -6,7 +6,7 @@ public class FlushLevel extends RankTrioLevel {
 
 	protected FlushLevel(TurnsTakenCounterLabel validTurnTime, ScoreCounterLabel scoreCounter, JFrame mainFrame) {
 		super(validTurnTime, scoreCounter, mainFrame);
-		this.getTurnsTakenCounter().setDifficultyModeLabel("Flush Level");
+		super.getTurnsTakenCounter().setDifficultyModeLabel("Flush Level");
 		this.setCardsToTurnUp(5);
 	}
 
@@ -25,7 +25,8 @@ public class FlushLevel extends RankTrioLevel {
 				Card otherCard2 = (Card) this.getTurnedCardsBuffer().get(1);
 				Card otherCard3 = (Card) this.getTurnedCardsBuffer().get(2);
 				Card otherCard4 = (Card) this.getTurnedCardsBuffer().get(3);
-				if((card.getSuit().equals(otherCard1.getSuit())) && (card.getSuit().equals(otherCard2.getSuit())) && (card.getSuit().equals(otherCard3.getSuit())) && (card.getSuit().equals(otherCard4.getSuit())))  {
+				if((card.getSuit().equals(otherCard1.getSuit())) && (card.getSuit().equals(otherCard2.getSuit()))
+					&& (card.getSuit().equals(otherCard3.getSuit())) && (card.getSuit().equals(otherCard4.getSuit()))) {
 					// Three cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
 					int rankValue1 = card.getRankValue();
@@ -34,7 +35,6 @@ public class FlushLevel extends RankTrioLevel {
 					int rankValue4 = otherCard3.getRankValue();
 					int rankValue5 = otherCard4.getRankValue();
 					this.getScoreCounter().increment(700 + rankValue1 + rankValue2 + rankValue3 + rankValue4 + rankValue5);
-					
 				}
 				else {
 					// The cards do not match, so start the timer to turn them down

@@ -69,6 +69,7 @@ public class MemoryGame implements ActionListener {
 		newMenuItem("Same Rank Trio Level", difficultyMenu, this);
 		newMenuItem("Flush Level", difficultyMenu, this);
 		newMenuItem("Combo Level", difficultyMenu, this);
+		newMenuItem("Four of a kind Level", difficultyMenu, this);
 
 		// Help menu
 		JMenu helpMenu = new JMenu("Help");
@@ -93,6 +94,7 @@ public class MemoryGame implements ActionListener {
 			else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("trio");
 			else if(e.getActionCommand().equals("Flush Level")) newGame("flush");
 			else if(e.getActionCommand().equals("Combo Level")) newGame("combo");
+			else if(e.getActionCommand().equals("Four of a kind Level")) newGame("fourkind");
 			else if(e.getActionCommand().equals("How To Play")) showInstructions();
 			else if(e.getActionCommand().equals("About")) showAbout();
 			else if(e.getActionCommand().equals("Exit")) System.exit(0);
@@ -149,6 +151,9 @@ public class MemoryGame implements ActionListener {
 		}
 		else if(difficultyMode.equalsIgnoreCase("combo")) {
 			this.difficulty = new ComboLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
+		}
+		else if(difficultyMode.equalsIgnoreCase("fourkind")) {
+			this.difficulty = new FourOfAKindLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}
 		else {
 			throw new RuntimeException("Illegal Game Level Detected");
