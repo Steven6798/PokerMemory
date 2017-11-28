@@ -151,6 +151,9 @@ public class MemoryGame implements ActionListener {
 		else if(difficultyMode.equalsIgnoreCase("flush")) {
 			this.difficulty = new FlushLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}
+		else if(difficultyMode.equalsIgnoreCase("straight")) {
+			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
+		}
 		else if(difficultyMode.equalsIgnoreCase("combo")) {
 			this.difficulty = new ComboLevel(this.turnCounterLabel, this.scoreCounterLabel, this.mainFrame);
 		}

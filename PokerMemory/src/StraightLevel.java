@@ -57,7 +57,7 @@
 					Card otherCard4 = (Card) this.getTurnedCardsBuffer().get(3);
 					
 					
-					if(!(card.getSuit().equals(otherCard1.getSuit())) && !(card.getSuit().equals(otherCard2.getSuit())) && !(card.getSuit().equals(otherCard3.getSuit())) && !(card.getSuit().equals(otherCard4.getSuit())))  {
+					if((card.getSuit().equals(otherCard1.getSuit())) && (card.getSuit().equals(otherCard2.getSuit())) && (card.getSuit().equals(otherCard3.getSuit())) && (card.getSuit().equals(otherCard4.getSuit())))  {
 						// Three cards match, so remove them from the list (they will remain face up)
 						this.getTurnedCardsBuffer().clear();
 						int rankValue1 = card.getRankValue();
@@ -92,5 +92,5 @@
 			}
 			return false;
 		}
-	
+		
 }

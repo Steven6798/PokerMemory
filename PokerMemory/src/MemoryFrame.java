@@ -246,6 +246,10 @@ public class MemoryFrame extends JFrame {
 			this.difficulty = new FlushLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Flush Level");
 		}
+		else if(difficultyMode.equalsIgnoreCase("straight")) {
+			this.difficulty = new ComboLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
+			this.getLevelDescriptionLabel().setText("Straight Level");
+		}
 		else if(difficultyMode.equalsIgnoreCase("combo")) {
 			this.difficulty = new ComboLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Combo Level");
