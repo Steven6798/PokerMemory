@@ -130,7 +130,11 @@ public abstract class GameLevel implements ActionListener {
 	 * Selects and adds the cards that will fill the grid according to the requirements of each level
 	 */
 	protected abstract void makeDeck();
-
+	
+	/**
+	 * Sort the card in increasing order.
+	 */
+	protected abstract void sortTurnedCards();
 	/**
 	 * The specified card wants to turn, add if currently less than 2 cards
 	 *

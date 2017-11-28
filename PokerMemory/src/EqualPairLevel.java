@@ -16,7 +16,7 @@ public class EqualPairLevel extends EasyLevel {
 
 	protected EqualPairLevel(TurnsTakenCounterLabel validTurnTime, ScoreCounterLabel scoreCounter, JFrame mainFrame) {
 		super(validTurnTime, scoreCounter, mainFrame);
-		super.getTurnsTakenCounter().setDifficultyModeLabel("Medium Level");
+		this.getTurnsTakenCounter().setDifficultyModeLabel("Medium Level");
 	}
 	
 	@Override
@@ -92,14 +92,13 @@ public class EqualPairLevel extends EasyLevel {
 		return "MediumMode";
 	}
 
-	@Override
-	protected boolean  isGameOver() {
-		for (int i =0; i< this.getGrid().size();i++) {
-			if(!this.getGrid().get(i).isFaceUp()) {
-				return false;
-			}
-		}
-		return true;
-	}
-
+//	@Override
+//	protected boolean  isGameOver() {
+//		for (int i =0; i< this.getGrid().size();i++) {
+//			if(!this.getGrid().get(i).isFaceUp()) {
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
 }

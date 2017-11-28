@@ -61,6 +61,18 @@ public class EasyLevel extends GameLevel {
 			this.getGrid().add( new Card(this, this.getCardIcons()[num], backIcon, num, rank, suit));
 		}
 	}
+	
+	protected void sortTurnedCards() {
+		for (int i = 0; i < this.getTurnedCardsBuffer().size() - 1; i++) {
+			for (int j = 0; j < (this.getTurnedCardsBuffer().size() - 1) - i; j++) {
+				if (this.getTurnedCardsBuffer().get(j).getRankValue() > this.getTurnedCardsBuffer().get(j + 1).getRankValue()) {
+					Card temp = this.getTurnedCardsBuffer().get(j);
+					this.getTurnedCardsBuffer().set(j, this.getTurnedCardsBuffer().get(j + 1));
+					this.getTurnedCardsBuffer().set(j + 1, temp);
+				}
+			}
+		}
+	}
 
 	@Override
 	protected boolean turnUp(Card card) {

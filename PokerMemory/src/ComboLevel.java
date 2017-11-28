@@ -9,18 +9,6 @@ public class ComboLevel extends FlushLevel {
 		super(validTurnTime, scoreCounter, mainFrame);
 		super.getTurnsTakenCounter().setDifficultyModeLabel("Combo Level");
 	}
-	
-	protected void sortTurnedCards() {
-		for (int i = 0; i < this.getTurnedCardsBuffer().size() - 1; i++) {
-			for (int j = 0; j < (this.getTurnedCardsBuffer().size() - 1) - i; j++) {
-				if (this.getTurnedCardsBuffer().get(j).getRankValue() > this.getTurnedCardsBuffer().get(j + 1).getRankValue()) {
-					Card temp = this.getTurnedCardsBuffer().get(j);
-					this.getTurnedCardsBuffer().set(j, this.getTurnedCardsBuffer().get(j + 1));
-					this.getTurnedCardsBuffer().set(j + 1, temp);
-				}
-			}
-		}
-	}
 
 	@Override
 	protected boolean turnUp(Card card) {
@@ -74,10 +62,10 @@ public class ComboLevel extends FlushLevel {
 		boolean userMadeChoice = false;
 		while (!userMadeChoice) {
 			int decision = JOptionPane.showOptionDialog(null, "Poker Hand: "
-					+ hand +  "\nPoints worth: " + Integer.toString(score)
-					+ "\nDo you want to keep the hand?",
-					"UPRM Hackers memory", JOptionPane.OK_CANCEL_OPTION,
-					JOptionPane.INFORMATION_MESSAGE, null, new String[] { "No", "Yes" }, "default");
+						   + hand +  "\nPoints worth: " + Integer.toString(score)
+					       + "\nDo you want to keep the hand?",
+					       "UPRM Hackers memory", JOptionPane.OK_CANCEL_OPTION,
+					       JOptionPane.INFORMATION_MESSAGE, null, new String[] { "No", "Yes" }, "default");
 			if (decision == 1) {
 				userMadeChoice = true;
 				this.getScoreCounter().increment(score);

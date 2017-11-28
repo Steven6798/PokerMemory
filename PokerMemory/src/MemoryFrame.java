@@ -207,6 +207,13 @@ public class MemoryFrame extends JFrame {
 		this.levelDescriptionLabel = levelDescriptionLabel;
 	}
 
+	public void setGameLevel(GameLevel l) {
+		this.difficulty = l;
+	}
+	
+	public void setScore(long score) {
+		this.scoreCounterLabel.setText("" + score);
+	}
 	/**
 	 * Prepares a new game (first game or non-first game)
 	 * @throws IOException 
