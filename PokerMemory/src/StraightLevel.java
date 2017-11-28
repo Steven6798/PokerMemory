@@ -14,6 +14,7 @@
 			this.setRowsPerGrid(5);
 		}
 
+		
 		@Override
 		protected void makeDeck() {
 			// In Straight Level the grid consists of ...

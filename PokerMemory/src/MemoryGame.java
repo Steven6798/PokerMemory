@@ -223,6 +223,7 @@ public class MemoryGame implements ActionListener {
 				, "How To Play", JOptionPane.PLAIN_MESSAGE);
 	}
 
+	
 	/**
 	 * Shows an dialog box with information about the program
 	 */
