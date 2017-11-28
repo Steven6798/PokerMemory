@@ -68,6 +68,7 @@ public class MemoryGame implements ActionListener {
 		newMenuItem("Equal Pair Level", difficultyMenu, this);
 		newMenuItem("Same Rank Trio Level", difficultyMenu, this);
 		newMenuItem("Flush Level", difficultyMenu, this);
+		newMenuItem("Straight Level", difficultyMenu, this);
 		newMenuItem("Combo Level", difficultyMenu, this);
 		newMenuItem("Four of a kind Level", difficultyMenu, this);
 
@@ -93,6 +94,7 @@ public class MemoryGame implements ActionListener {
 			else if(e.getActionCommand().equals("Equal Pair Level")) newGame("medium");
 			else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("trio");
 			else if(e.getActionCommand().equals("Flush Level")) newGame("flush");
+			else if(e.getActionCommand().equals("Straight Level")) newGame("straight");
 			else if(e.getActionCommand().equals("Combo Level")) newGame("combo");
 			else if(e.getActionCommand().equals("Four of a kind Level")) newGame("fourkind");
 			else if(e.getActionCommand().equals("How To Play")) showInstructions();
