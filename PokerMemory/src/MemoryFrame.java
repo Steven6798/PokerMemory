@@ -77,7 +77,6 @@ public class MemoryFrame extends JFrame {
 					else if(e.getActionCommand().equals("Straight Level")) newGame("straight");
 					else if(e.getActionCommand().equals("Combo Level")) newGame("combo");
 					else if(e.getActionCommand().equals("Four of a kind Level")) newGame("fourkind");
-					else if(e.getActionCommand().equals("Straight Level")) newGame("straight");
 					else if(e.getActionCommand().equals("How To Play")) showInstructions();
 					else if(e.getActionCommand().equals("About")) showAbout();
 					else if(e.getActionCommand().equals("Exit")) System.exit(0);
