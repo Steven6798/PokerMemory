@@ -1,10 +1,11 @@
 /**
- * Stores currently turned cards
- * also handles turning cards back down after a delay.
+ * Stores currently turned cards.
+ * Also, handles turning cards back down after a delay.
  *
  * @author Michael Leonhard (Original Author)
- * @author Modified by Bienvenido VÃ©lez (UPRM)
- * @version Sept 2017
+ * @author Modified by Bienvenido Vélez (UPRM)
+ * @author Modified by UPRM Hackers.java (UPRM)
+ * @version Dic 2017
  */
 
 import java.util.Random;
@@ -28,8 +29,8 @@ public class EasyLevel extends GameLevel {
 		// Creates a deck to fill the 4x4 grid with all cards different from each other
 		ImageIcon backIcon = this.getCardIcons()[this.getTotalCardsPerDeck()];
 
-		// make an array of card numbers: 0, 0, 1, 1, 2, 2, ..., 7, 7
-		// duplicate the image in as many cards as the input imageClones
+		// Make an array of card numbers: 0, 0, 1, 1, 2, 2, ..., 7, 7
+		// Duplicate the image in as many cards as the input imageClones
 		int totalCardsInGrid = getRowsPerGrid() * getCardsPerRow();
 		int totalUniqueCards = totalCardsInGrid;
 
@@ -48,20 +49,21 @@ public class EasyLevel extends GameLevel {
 			}
 		}
 
-		// randomize the order of the cards
+		// Randomize the order of the cards
 		this.randomizeIntArray(cardsToAdd);
 
-		// make each card object and add it to the game grid
+		// Make each card object and add it to the game grid
 		for(int i = 0; i < cardsToAdd.length; i++) {
-			// number of the card, randomized
+			// Number of the card, randomized
 			int num = cardsToAdd[i];
-			// make the card object and add it to the panel
+			// Make the card object and add it to the panel
 			String rank = cardNames[num].substring(0, 1);
 			String suit = cardNames[num].substring(1, 2);
-			this.getGrid().add( new Card(this, this.getCardIcons()[num], backIcon, num, rank, suit));
+			this.getGrid().add(new Card(this, this.getCardIcons()[num], backIcon, num, rank, suit));
 		}
 	}
 	
+	@Override
 	protected void sortTurnedCards() {
 		for (int i = 0; i < this.getTurnedCardsBuffer().size() - 1; i++) {
 			for (int j = 0; j < (this.getTurnedCardsBuffer().size() - 1) - i; j++) {
