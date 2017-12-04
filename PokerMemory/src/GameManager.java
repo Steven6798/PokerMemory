@@ -3,10 +3,10 @@
  *
  * @author Michael Leonhard (Original Author)
  * @author Modified by Bienvenido Vélez (UPRM)
- * @version Sept 2017
+ * @author Modified by UPRM Hackers.java (UPRM)
+ * @version Dic 2017
  */
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
 public class GameManager {
 
 	/**
-	 * @param args
-	 * @throws InterruptedException 
-	 * @throws IOException 
+	 * @param args.
+	 * @throws InterruptedException. 
+	 * @throws IOException. 
 	 */
 	public static void main(String[] args) throws InterruptedException, IOException {
-		// make an instance of the main game class
+		// Make an instance of the main game class
 
 		int playMore = 2;
 		while (playMore != 1) {
@@ -30,7 +30,7 @@ public class GameManager {
 			while(!instance.gameOver()) {
 				Thread.sleep(500);
 			}
-			playMore = JOptionPane.showConfirmDialog(null, "Play Again?", "GAME OVER!!!", JOptionPane.YES_NO_OPTION);
+			playMore = JOptionPane.showConfirmDialog(null, "Congratulations, you found every posible combination. Play Again?", "Game over.", JOptionPane.YES_NO_OPTION);
 			System.out.println(playMore+"");
 		}
 		System.exit(0);

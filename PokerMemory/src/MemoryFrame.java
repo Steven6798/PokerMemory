@@ -25,9 +25,6 @@ import java.awt.event.ActionEvent;
 
 public class MemoryFrame extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8953942942328167118L;
 	private static final boolean DEBUG = true;
 	private JPanel contentPane;
@@ -58,7 +55,7 @@ public class MemoryFrame extends JFrame {
 	 */
 	public MemoryFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800,700);
+		setBounds(100, 100, 800, 700);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -73,10 +70,10 @@ public class MemoryFrame extends JFrame {
 					if(e.getActionCommand().equals("Easy Level")) newGame("easy");
 					else if(e.getActionCommand().equals("Equal Pair Level")) newGame("equalpair");
 					else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("ranktrio");
+					else if(e.getActionCommand().equals("Four of a kind Level")) newGame("fourkind");
 					else if(e.getActionCommand().equals("Flush Level")) newGame("flush");
 					else if(e.getActionCommand().equals("Straight Level")) newGame("straight");
 					else if(e.getActionCommand().equals("Combo Level")) newGame("combo");
-					else if(e.getActionCommand().equals("Four of a kind Level")) newGame("fourkind");
 					else if(e.getActionCommand().equals("How To Play")) showInstructions();
 					else if(e.getActionCommand().equals("About")) showAbout();
 					else if(e.getActionCommand().equals("Exit")) System.exit(0);
@@ -98,6 +95,10 @@ public class MemoryFrame extends JFrame {
 		sameRankTrioMenuItem.addActionListener(menuHandler);		
 		mnFile.add(sameRankTrioMenuItem);
 		
+		JMenuItem fourKindMenuItem = new JMenuItem("Four of a kind Level");
+		fourKindMenuItem.addActionListener(menuHandler);		
+		mnFile.add(fourKindMenuItem);
+		
 		JMenuItem flushMenuItem = new JMenuItem("Flush Level");
 		flushMenuItem.addActionListener(menuHandler);		
 		mnFile.add(flushMenuItem);
@@ -109,10 +110,6 @@ public class MemoryFrame extends JFrame {
 		JMenuItem comboMenuItem = new JMenuItem("Combo Level");
 		comboMenuItem.addActionListener(menuHandler);		
 		mnFile.add(comboMenuItem);
-		
-		JMenuItem fourKindMenuItem = new JMenuItem("Four of a kind Level");
-		fourKindMenuItem.addActionListener(menuHandler);		
-		mnFile.add(fourKindMenuItem);
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
@@ -151,7 +148,6 @@ public class MemoryFrame extends JFrame {
 
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		panel_1.add(horizontalStrut_2);
-
 		
 //		JLabel lblNewLabel = new JLabel("Turns:");
 //		panel_1.add(lblNewLabel);
@@ -169,7 +165,7 @@ public class MemoryFrame extends JFrame {
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 
-//		JLabel lblNewLabel_2 = new JLabel("Points:");
+//		JLabel lblNewLabel_2 = new JLabel("Score:");
 //		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 //		panel_1.add(lblNewLabel_2);
 		
@@ -221,15 +217,15 @@ public class MemoryFrame extends JFrame {
 		this.scoreCounterLabel.setText("" + score);
 	}
 	/**
-	 * Prepares a new game (first game or non-first game)
-	 * @throws IOException 
+	 * Prepares a new game (first game or non-first game).
+	 * @throws IOException.
 	 */
 	public void newGame(String difficultyMode) throws IOException {
 		// Reset the turn and score counter label
 		this.turnCounterLabel.reset();
 		this.scoreCounterLabel.reset();
 
-		// make a new card field with cards, and add it to the window
+		// Make a new card field with cards, and add it to the window
 
 		if(difficultyMode.equalsIgnoreCase("easy")) {
 			this.difficulty = new EasyLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
@@ -243,21 +239,21 @@ public class MemoryFrame extends JFrame {
 			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Same Rank Trio Level");
 		}
+		else if(difficultyMode.equalsIgnoreCase("fourkind")) {
+			this.difficulty = new FourOfAKindLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
+			this.getLevelDescriptionLabel().setText("Four of a kind Level");
+		}
 		else if(difficultyMode.equalsIgnoreCase("flush")) {
 			this.difficulty = new FlushLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Flush Level");
 		}
 		else if(difficultyMode.equalsIgnoreCase("straight")) {
-			this.difficulty = new ComboLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
+			this.difficulty = new StraightLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Straight Level");
 		}
 		else if(difficultyMode.equalsIgnoreCase("combo")) {
 			this.difficulty = new ComboLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
 			this.getLevelDescriptionLabel().setText("Combo Level");
-		}
-		else if(difficultyMode.equalsIgnoreCase("fourkind")) {
-			this.difficulty = new FourOfAKindLevel(this.turnCounterLabel, this.scoreCounterLabel, this);
-			this.getLevelDescriptionLabel().setText("Four of a kind Level");
 		}
 		else {
 			throw new RuntimeException("Illegal Game Level Detected");
@@ -266,20 +262,20 @@ public class MemoryFrame extends JFrame {
 		this.turnCounterLabel.reset();
 		this.scoreCounterLabel.reset();
 
-		// clear out the content pane (removes turn counter label and card field)
+		// Clear out the content pane (removes turn counter label and card field)
 		BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();
 		this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
 		this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
 
-		// show the window (in case this is the first game)
+		// Show the window (in case this is the first game)
 		this.setVisible(true);
 	}
 	
 	public JPanel showCardDeck() {
-		// make the panel to hold all of the cards
+		// Make the panel to hold all of the cards
 		JPanel panel = new JPanel(new GridLayout(difficulty.getRowsPerGrid(),difficulty.getCardsPerRow()));
 
-		// this set of cards must have their own manager
+		// This set of cards must have their own manager
 		this.difficulty.makeDeck();
 
 		for(int i= 0; i<difficulty.getGrid().size();i++) {
@@ -293,7 +289,7 @@ public class MemoryFrame extends JFrame {
 	}
 
 	/**
-	 * Shows an instructional dialog box to the user
+	 * Shows an instructional dialog box to the user.
 	 */
 	private void showInstructions() {
 		dprintln("MemoryGame.showInstructions()");
@@ -301,53 +297,51 @@ public class MemoryFrame extends JFrame {
 				"How To Play\r\n" +
 						"\r\n" +
 						"EQUAL PAIR Level\r\n"+
-						"The game consists of 8 pairs of cards.  At the start of the game,\r\n"+
-						"every card is face down.  The object is to find all the pairs and\r\n"+
-						"turn them face up.\r\n"+
+						"The game consists of 8 pairs of cards.  At the start of the game, every card is face down.  The\r\n"+
+						"object is to find every pair of cards in the fewest number of turns.\r\n"+
 						"\r\n"+
-						"Click on two cards to turn them face up. If the cards are the \r\n"+
-						"same, then you have discovered a pair.  The pair will remain\r\n"+
-						"turned up.  If the cards are different, they will flip back\r\n"+
-						"over automatically after a short delay.  Continue flipping\r\n"+
-						"cards until you have discovered all of the pairs.  The game\r\n"+
-						"is won when all cards are face up.\r\n"+
+						"Click on two cards to turn them face up.  If the cards are the same, then you have discovered a\r\n"+
+						"pair.  The pair will remain turned up.  If the cards are different, they will flip back over\r\n"+
+						"automatically after a short delay.  The game is won when you have discovered every pair.\r\n"+
 						"\r\n"+
 						"SAME RANK TRIO Level\r\n"+
-						"The game consists of a grid of distinct cards.  At the start of the game,\r\n"+
-						"every card is face down.  The object is to find all the trios \r\n"+
-						"of cards with the same rank and turn them face up.\r\n"+
+						"The game consists of a grid of distinct cards.  At the start of the game, every card is face down.\r\n"+
+						"The object is to find ever trio of cards with the same ranks in the fewest number of turns.\r\n"+
 						"\r\n"+
-						"Click on three cards to turn them face up. If the cards have the \r\n"+
-						"same rank, then you have discovered a trio.  The trio will remain\r\n"+
-						"turned up.  If the cards are different, they will flip back\r\n"+
-						"over automatically after a short delay.  The game is won\r\n"+
-						"when you have discovered every trio. \r\n"+
+						"Click on three cards to turn them face up.  If the cards have the same rank, then you have\r\n"+
+						"discovered a trio.  The trio will remain turned up.  If the cards are different, they will flip back\r\n"+
+						"over automatically after a short delay.  The game is won when you have discovered every trio.\r\n"+
 						"\r\n"+
-						"Each time you flip three cards up, the turn counter will\r\n"+
-						"increase.  Try to win the game in the fewest number of turns! \r\n" +
+						"FOUR OF A KIND Level\r\n"+
+						"The game consists of a grid of distinct cards.  At the start of the game, every card is face down.\r\n"+
+						"The object is to uncover every quartet with the same rank in the fewest number of turns\r\n"+
+						"\r\n"+
+						"Click on four cards to turn them face up.  If the cards have the same rank, then you have\r\n"+
+						"discovered a quartet.  The quartet will remain turned up.  If the cards are different, they will flip\r\n"+
+						"back over automatically after a short delay.  The game is won when you have discovered\r\n"+
+						"every quartet.\r\n"+
 						"\r\n"+
 						"FLUSH Level\r\n"+
-						"The game consists of a grid of distinct cards.  At the start of the game,\r\n"+
-						"every card is face down.  The object is to find all the quintets \r\n"+
-						"of cards with the same suit and turn them face up.\r\n"+
+						"The game consists of a grid of distinct cards.  At the start of the game, every card is face down.\r\n"+
+						"The object is to find every quintet of cards with the same suit in the fewest number of turns.\r\n"+
 						"\r\n"+
-						"Click on five cards to turn them face up. If the cards have the \r\n"+
-						"same suit, then you have discovered a quintet.  The quintet will remain\r\n"+
-						"turned up.  If the cards are different, they will flip back\r\n"+
-						"over automatically after a short delay.  The game is won\r\n"+
-						"when you have discovered every quintet. \r\n"+
+						"Click on five cards to turn them face up.  If the cards have the same suit, then you have\r\n"+
+						"discovered a quintet.  The quintet will remain turned up.  If the cards are different, they will flip\r\n"+
+						"back over automatically after a short delay.  The game is won when you have discovered\r\n"+
+						"every quintet.\r\n"+
 						"\r\n"+
-						"Each time you flip five cards up, the turn counter will\r\n"+
-						"increase.  Try to win the game in the fewest number of turns!";
+						"COMBO Level\r\n"+
+						"The game consists of a grid of distinct cards.  At the start of the game, every card is face down.\r\n"+
+						"Uncover a poker hand and decide whether you stay with it or not.  The object is to uncover the\r\n"+
+						"best poker hands in the fewest number of turns.  The game is won when you have uncovered\r\n"+
+						"every card.";
 		
-						
-
 		JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT
 				, "How To Play", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	/**
-	 * Shows an dialog box with information about the program
+	 * Shows an dialog box with information about the program.
 	 */
 	private void showAbout() {
 		dprintln("MemoryGame.showAbout()");
@@ -357,9 +351,9 @@ public class MemoryFrame extends JFrame {
 				, "About Memory Game", JOptionPane.PLAIN_MESSAGE);
 	}
 	/**
-	 * Prints debugging messages to the console
+	 * Prints debugging messages to the console.
 	 *
-	 * @param message the string to print to the console
+	 * @param message the string to print to the console.
 	 */
 	static public void dprintln( String message ) {
 		if (DEBUG) System.out.println( message );

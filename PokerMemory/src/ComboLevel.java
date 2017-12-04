@@ -1,9 +1,16 @@
+/**
+ * Stores currently turned cards, allows only five cards to be uncovered on each turn.
+ * Also handles turning cards back down after a delay if the user don't want the uncovered hand.
+ * 
+ * @author UPRM Hackers.java
+ */
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class ComboLevel extends FlushLevel {
+public class ComboLevel extends StraightLevel {
 
-	// TRIO LEVEL: The goal is to find, on each turn, three cards with the same rank
+	// Combo Level: The goal is to find the best poker hands
 
 	protected ComboLevel(TurnsTakenCounterLabel validTurnTime, ScoreCounterLabel scoreCounter, JFrame mainFrame) {
 		super(validTurnTime, scoreCounter, mainFrame);
@@ -12,18 +19,20 @@ public class ComboLevel extends FlushLevel {
 
 	@Override
 	protected boolean turnUp(Card card) {
-		// the card may be turned
+		// The card may be turned
 		if(this.getTurnedCardsBuffer().size() < getCardsToTurnUp()) {
-			// add the card to the list
+			// Add the card to the list
 			this.getTurnedCardsBuffer().add(card);
 			if(this.getTurnedCardsBuffer().size() == getCardsToTurnUp()) {
 				// We are uncovering the last card in this turn
 				// Record the player's turn
 				this.getTurnsTakenCounter().increment();
-				// sort cards
+				// Sort turned up cards
 				sortTurnedCards();
+				card.faceUp();
+				// Check hand
 				int score = PokerHand.checkHand(getTurnedCardsBuffer());
-				setScore(score, card, getPokerHand(score));
+				setScore(score, getPokerHand(score));
 			}
 			return true;
 		}
@@ -34,11 +43,17 @@ public class ComboLevel extends FlushLevel {
 
 		String hand = null;
 		
-		if(score >= 3500) {
+		if(score >= 4500) {
+			hand = "Straight Flush";
+		}		
+		else if(score >= 4000) {
 			hand = "Four of a Kind";
 		}
-		else if (score >= 2000) {
+		else if (score >= 3500) {
 			hand = "Full House";
+		}
+		else if (score >= 1000) {
+			hand = "Straight";
 		}
 		else if (score >= 700) {
 			hand = "Flush";
@@ -57,14 +72,19 @@ public class ComboLevel extends FlushLevel {
 		}
 		return hand;
 	}
-	
-	protected void setScore(int score, Card card, String hand) {
+	/**
+	 * Ask the user if he wants to keep the hand and set the score depending of the decision.
+	 * 
+	 * @param score the score of the poker hand.
+	 * @param hand the name of the poker hand.
+	 */
+	protected void setScore(int score, String hand) {
 		boolean userMadeChoice = false;
 		while (!userMadeChoice) {
 			int decision = JOptionPane.showOptionDialog(null, "Poker Hand: "
 						   + hand +  "\nPoints worth: " + Integer.toString(score)
 					       + "\nDo you want to keep the hand?",
-					       "UPRM Hackers memory", JOptionPane.OK_CANCEL_OPTION,
+					       "UPRM Hackers.java Poker Memory", JOptionPane.OK_CANCEL_OPTION,
 					       JOptionPane.INFORMATION_MESSAGE, null, new String[] { "No", "Yes" }, "default");
 			if (decision == 1) {
 				userMadeChoice = true;
@@ -72,7 +92,7 @@ public class ComboLevel extends FlushLevel {
 				this.getTurnedCardsBuffer().clear();
 			} 
 			else if (decision == 0) {
-				this.getScoreCounter().increment(-50);
+				this.getScoreCounter().increment(-25);
 				this.getTurnDownTimer().start();
 				userMadeChoice = true;
 			}

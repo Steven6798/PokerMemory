@@ -2,24 +2,22 @@
  * Inherits from JLabel and implements the turn counter widget.
  *
  * @author Michael Leonhard (Original Author)
- * @author Modified by Bienvenido VÃ©lez (UPRM)
+ * @author Modified by Bienvenido Vélez (UPRM)
  * @version Sept 2017
  */
 
 import javax.swing.JLabel;
 
 public class TurnsTakenCounterLabel extends JLabel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
-	// data fields
+	// Data fields
 	private int numTurns = 0;
 	private String DESCRIPTION;
 	
 	/**
-	 * Default constructor, starts counter at 0
+	 * Default constructor, starts counter at 0.
 	 */
 	public TurnsTakenCounterLabel() {
 		super();
@@ -27,8 +25,8 @@ public class TurnsTakenCounterLabel extends JLabel {
 	}
 	
 	public void setDifficultyModeLabel(String difficultyMode) {
-		DESCRIPTION = "Turns Taken: ";
-		//setHorizontalTextPosition(JLabel.LEFT);
+		DESCRIPTION = "Turns taken: ";
+		setHorizontalTextPosition(JLabel.LEFT);
 	}
 	
 	public int getNumOfTurns() {
@@ -36,14 +34,14 @@ public class TurnsTakenCounterLabel extends JLabel {
 	}
 	
 	/**
-	 * Update the text label with the current counter value
+	 * Update the text label with the current counter value.
 	 */
 	private void update() {
 		this.setText(DESCRIPTION + this.getNumOfTurns());
 	}
 	
 	/**
-	 * Increments the counter and updates the text label
+	 * Increments the counter and updates the text label.
 	 */
 	public void increment() {
 		this.numTurns++;
@@ -51,7 +49,7 @@ public class TurnsTakenCounterLabel extends JLabel {
 	}
 	
 	/**
-	 * Resets the counter to zero and updates the text label
+	 * Resets the counter to zero and updates the text label.
 	 */
 	public void reset() {
 		this.numTurns = 0;
