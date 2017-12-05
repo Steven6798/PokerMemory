@@ -1,7 +1,7 @@
 /**
  * Inherits from JLabel and implements the score counter widget.
  *
- * @author UPRM Hackers.java
+ * @author RUMHackers.java
  */
 
 import javax.swing.JLabel;
@@ -29,7 +29,7 @@ public class ScoreCounterLabel extends JLabel {
 	 * Update the text label with the current counter value.
 	 */
 	private void update() {
-		this.setText("Score: " + this.getScore());
+		this.setText(" " + this.getScore());
 	}
 	
 	/**

@@ -14,7 +14,6 @@ public class TurnsTakenCounterLabel extends JLabel {
 	
 	// Data fields
 	private int numTurns = 0;
-	private String DESCRIPTION;
 	
 	/**
 	 * Default constructor, starts counter at 0.
@@ -24,10 +23,7 @@ public class TurnsTakenCounterLabel extends JLabel {
 		reset();
 	}
 	
-	public void setDifficultyModeLabel(String difficultyMode) {
-		DESCRIPTION = "Turns taken: ";
-		setHorizontalTextPosition(JLabel.LEFT);
-	}
+	public void setDifficultyModeLabel(String difficultyMode) {}
 	
 	public int getNumOfTurns() {
 		return this.numTurns;
@@ -37,7 +33,7 @@ public class TurnsTakenCounterLabel extends JLabel {
 	 * Update the text label with the current counter value.
 	 */
 	private void update() {
-		this.setText(DESCRIPTION + this.getNumOfTurns());
+		this.setText(" "+ this.getNumOfTurns());
 	}
 	
 	/**

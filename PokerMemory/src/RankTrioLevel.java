@@ -3,8 +3,9 @@
  * Also handles turning cards back down after a delay if cards have different ranks.
  *
  * @author Michael Leonhard (Original Author)
- * @author Modified by Bienvenido VÃ©lez (UPRM)
- * @version Sept 2017
+ * @author Modified by Bienvenido Vélez (UPRM)
+ * @author Modified by RUMHackers.java (UPRM)
+ * @version Dic 2017
  */
 
 import java.util.ArrayList;
@@ -89,12 +90,12 @@ public class RankTrioLevel extends EqualPairLevel {
 	
 	@Override
 	protected boolean  isGameOver() {
-		// Initialize a dynamic array of integers.
+		// Initialize a dynamic array of integers
 		ArrayList<Integer> cardsDownList = new ArrayList<Integer>();
 		for (int i = 0; i< this.getGrid().size(); i++) {
 			if(!this.getGrid().get(i).isFaceUp()) {
 				if(this.getGrid().get(i).getRankValue() <= 13) {
-					// Store every face down card value on the array except the A.
+					// Store every face-down card rank value in the array except the A
 					cardsDownList.add(this.getGrid().get(i).getRankValue());
 				}
 			}
@@ -102,10 +103,10 @@ public class RankTrioLevel extends EqualPairLevel {
 		for (int i = 0; i<cardsDownList.size(); i++) {
 			int cardRepetition = 0;
 			for (int j = 0; j<cardsDownList.size(); j++) {
-				// Compare the selected card value with the others.
+				// Compare the selected card rank value with the other rank values
 				if(cardsDownList.get(i) == cardsDownList.get(j)) {
 					cardRepetition++;
-					//If there is more than 1 card with the same value, then the game is not over.
+					// If there is more than 1 card with the same value, then the game is not over
 					if (cardRepetition > 1) {
 						return false;
 					}
