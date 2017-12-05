@@ -1,10 +1,11 @@
 /**
- * Stores currently turned cards
- * also handles turning cards back down after a delay.
+ * Stores currently turned cards.
+ * Also, handles turning cards back down after a delay.
  *
  * @author Michael Leonhard (Original Author)
- * @author Modified by Bienvenido VÃ©lez (UPRM)
- * @version Sept 2017
+ * @author Modified by Bienvenido Vélez (UPRM)
+ * @author Modified by RUMHackers.java (UPRM)
+ * @version Dic 2017
  */
 
 import java.util.ArrayList;
@@ -19,41 +20,41 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-public abstract class GameLevel implements ActionListener 
-{
-	private Vector<Card> turnedCardsBuffer;					// List of cards turned up in current turn
-	private int TotalCardsPerDeck = 52;
-	private TurnsTakenCounterLabel turnsTakenCounter;	    // Turn counter is incremented at every card turned up
-	private Timer turnDownTimer;   							// Timer is used to make a delay
-	private int turnDownDelay = 2000;						// Milliseconds to leave cards up before turning them back down
-	private ArrayList<Card> grid;							// The list of cards in the deck in row major order
+public abstract class GameLevel implements ActionListener {
+	private Vector<Card> turnedCardsBuffer;						// List of cards turned up in current turn
+	private int TotalCardsPerDeck = 52;							// The numbers of cards per deck
+	private TurnsTakenCounterLabel turnsTakenCounter;	    	// Turn counter is incremented at every card turned up
+	private ScoreCounterLabel scoreCounter;						// The counter is incremented depending on the hand
+	private Timer turnDownTimer;   								// Timer is used to make a delay
+	private int turnDownDelay = 2000;							// Milliseconds to leave cards up before turning them back down
+	private ArrayList<Card> grid;								// The list of cards in the deck in row major order
 	private MemoryFrame mainFrame;								// The main frame holding the cards
 	private int cardsPerRow = 4;								// Number of cards per row in grid
-	private int rowsPerGrid = 16;							// Number of card rows in Grid
-	private int cardsToTurnUp = 2;							// Number of cards to turn up on each turn
+	private int rowsPerGrid = 16;								// Number of card rows in Grid
+	private int cardsToTurnUp = 2;								// Number of cards to turn up on each turn
 	private int totalUniqueCards = rowsPerGrid * cardsPerRow;	// Total number of cards in the grid
-
+	
 	protected String cardNames[] = 
-		{   "2c", "2d", "2h", "2s", "3c", "3d", "3h", "3s", "4c", "4d", "4h", "4s",
-				"5c", "5d", "5h", "5s", "6c", "6d", "6h", "6s", "7c", "7d", "7h", "7s",
-				"8c", "8d", "8h", "8s", "9c", "9d", "9h", "9s", "tc", "td", "th", "ts",
-				"jc", "jd", "jh", "js", "qc", "qd", "qh", "qs", "kc", "kd", "kh", "ks",
-				"ac", "ad", "ah", "as", "back"
+		{"2c", "2d", "2h", "2s", "3c", "3d", "3h", "3s", "4c", "4d", "4h", "4s",
+		 "5c", "5d", "5h", "5s", "6c", "6d", "6h", "6s", "7c", "7d", "7h", "7s",
+		 "8c", "8d", "8h", "8s", "9c", "9d", "9h", "9s", "tc", "td", "th", "ts",
+		 "jc", "jd", "jh", "js", "qc", "qd", "qh", "qs", "kc", "kd", "kh", "ks",
+		 "ac", "ad", "ah", "as", "back"
 		};
 
-	protected String suits[] = { "c", "d", "h", "s" };
-	protected String ranks[] = { "2", "3", "4", "5", "6", "7", "8", "9", "t", "j", "q", "k", "a" };
+	protected String suits[] = {"c", "d", "h", "s"};
+	protected String ranks[] = {"2", "3", "4", "5", "6", "7", "8", "9", "t", "j", "q", "k", "a"};
 
 	private ImageIcon cardIcons[];
 	
 	/**
-	 * Constructor
+	 * Constructor.
 	 *
-	 * @param validTurnTime reference to turn counter label in main program window
+	 * @param validTurnTime reference to turn counter label in main program window.
 	 */
-	protected GameLevel(TurnsTakenCounterLabel counterLabel, int cardsToGuess, JFrame mainFrame)
-	{
+	protected GameLevel(TurnsTakenCounterLabel counterLabel, int cardsToGuess, ScoreCounterLabel scoreCounter, JFrame mainFrame) {
 		this.turnsTakenCounter = counterLabel; counterLabel.reset();
+		this.scoreCounter = scoreCounter; scoreCounter.reset();
 		this.turnedCardsBuffer= new Vector<Card>(cardsToGuess);
 		this.mainFrame = (MemoryFrame) mainFrame;
 		this.turnDownTimer = new Timer(turnDownDelay, this);
@@ -72,9 +73,10 @@ public abstract class GameLevel implements ActionListener
 	public int getTotalCardsPerDeck()          { return TotalCardsPerDeck; }
 	public int getTotalUniqueCards()           { return totalUniqueCards;  }
 	public TurnsTakenCounterLabel getTurnsTakenCounter() { return turnsTakenCounter; }
+	public ScoreCounterLabel getScoreCounter() { return scoreCounter; }
 	public Timer getTurnDownTimer()            { return turnDownTimer; }
-	public ImageIcon[] getCardIcons()          { return cardIcons;     }
-	public MemoryFrame getMainFrame() { return mainFrame; }
+	public ImageIcon[] getCardIcons()          { return cardIcons; }
+	public MemoryFrame getMainFrame() 		   { return mainFrame; }
 
 	// Setters
 	public void setTurnedCardsBuffer(Vector<Card> turnedCardsBuffer) {
@@ -109,6 +111,10 @@ public abstract class GameLevel implements ActionListener
 		this.turnsTakenCounter = turnsTakenCounter;
 	}
 	
+	public void setScoreCounter(ScoreCounterLabel scoreCounter) {
+		this.scoreCounter = scoreCounter;
+	}
+	
 	public void setTurnDownTimer(Timer turnDownTimer) {
 		this.turnDownTimer = turnDownTimer;
 	}
@@ -122,76 +128,72 @@ public abstract class GameLevel implements ActionListener
 	}
 
 	/**
-	 * Selects and adds the cards that will fill the grid according to the requirements of each level
-	 *
+	 * Selects and adds the cards that will fill the grid according to the requirements of each level.
 	 */
 	protected abstract void makeDeck();
-
+	
 	/**
-	 * The specified card wants to turn, add if currently less than 2 cards
+	 * Sort the turned up cards in increasing order.
+	 */
+	protected abstract void sortTurnedCards();
+	
+	/**
+	 * The specified card wants to turn, add if currently less than 2 cards.
 	 *
-	 * @param card the Card object that wants to turn
-	 * @return true if the card is allowed to turn, otherwise false
+	 * @param card the Card object that wants to turn.
+	 * @return true if the card is allowed to turn, otherwise false.
 	 */
 	protected abstract boolean turnUp(Card card);
 
 	/**
-	 * Invoked when timer event occurs, turns non-matching cards down
+	 * Invoked when timer event occurs, turns non-matching cards down.
 	 *
-	 * @param e the timer event information
+	 * @param e the timer event information.
 	 */
-	public void actionPerformed(ActionEvent e)
-	{
-		// turn each card back down
-		for(int i = 0; i < this.turnedCardsBuffer.size(); i++ )
-		{
+	public void actionPerformed(ActionEvent e) {
+		// Turn each card back down
+		for(int i = 0; i < this.turnedCardsBuffer.size(); i++ ) {
 			Card card = (Card)this.turnedCardsBuffer.get(i);
 			card.turnDown();
 		}
-		// flip face down the cards
+		// Flip face down the cards
 		this.turnedCardsBuffer.clear();
 	}
 	
 	/**
-	 * Returns true iff game is over. False otherwise.
-	 * 
+	 * Returns true if game is over. False otherwise.
 	 */
 	protected abstract boolean  isGameOver();
 	
 	// Utility methods potentially useful in subclasses
 	
 	private void loadCardIcons() {
-		// allocate array to store icons for unique cards, last icon is back icon
+		// Allocate array to store icons for unique cards, last icon is back icon
 
 		this.cardIcons = new ImageIcon[TotalCardsPerDeck+1];
 
-		for(int i = 0; i < TotalCardsPerDeck+1; i++ )
-		{
-			// make a new icon from a cardX.gif file
+		for(int i = 0; i < TotalCardsPerDeck+1; i++ ) {
+			// Make a new icon from a cardX.gif file
 			String fileName = "images/cards/" + cardNames[i] + ".gif";
 			this.cardIcons[i] = new ImageIcon(fileName);
-			// unable to load icon
-			if(this.cardIcons[i].getImageLoadStatus() == MediaTracker.ERRORED)
-			{
-				// inform the user of the error and then quit
+			// Unable to load icon
+			if(this.cardIcons[i].getImageLoadStatus() == MediaTracker.ERRORED) {
+				// Inform the user of the error and then quit
 				JOptionPane.showMessageDialog(this.mainFrame
 						, "The image " + fileName + " could not be loaded."
 						, "Memory Game Error", JOptionPane.ERROR_MESSAGE);
 				System.exit(1);
 			}
 		}
-		//return this.cardIcons;
 	}
 
-	protected  void randomizeIntArray(int[] a){
-		// TODO Auto-generated method stub
+	protected  void randomizeIntArray(int[] a) {
 		Random randomizer = new Random();
-		// iterate over the array
-		for(int i = 0; i < a.length; i++ )
-		{
-			// choose a random int to swap with
+		// Iterate over the array
+		for(int i = 0; i < a.length; i++ ) {
+			// Choose a random int to swap with
 			int d = randomizer.nextInt(a.length);
-			// swap the entries
+			// Swap the entries
 			int t = a[d];
 			a[d] = a[i];
 			a[i] = t;
