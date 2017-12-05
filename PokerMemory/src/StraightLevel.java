@@ -2,10 +2,11 @@
  * Stores currently turned cards, allows only five cards to be uncovered on each turn.
  * Also handles turning cards back down after a delay if cards are not consecutive in ranks.
  * 
- * @author UPRM Hackers.java
+ * @author RUMHackers.java
  */
 
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JFrame;
 
 public class StraightLevel extends FlushLevel {
@@ -29,7 +30,6 @@ public class StraightLevel extends FlushLevel {
 				this.getTurnsTakenCounter().increment();
 				// Sort cards
 				sortTurnedCards();
-				// get the other card (which was already turned up)
 				if(PokerHand.isStraight(getTurnedCardsBuffer()) == true) {
 					int score = PokerHand.checkHand(getTurnedCardsBuffer());
 					this.getScoreCounter().increment(score);
@@ -45,5 +45,37 @@ public class StraightLevel extends FlushLevel {
 		}
 		return false;
 	}
-
+	
+	@Override
+	protected boolean isGameOver() {
+		// Sort turned up cards
+		sortTurnedCards();
+		ArrayList<Integer> cardsDownList = new ArrayList<Integer>();
+		for (int i=0; i<this.getGrid().size(); i++) {
+			if(!this.getGrid().get(i).isFaceUp()) {
+				// Store every face-down card rank value on the array
+				cardsDownList.add(this.getGrid().get(i).getRankValue());
+			}
+		}
+		// Sort the array
+		Collections.sort(cardsDownList);
+		for (int i=0;i<cardsDownList.size();i++) {
+			int consecutiveCards = 1;
+			for (int j=0; j<cardsDownList.size(); j++) {
+				// Compare the selected card rank value with the other rank values
+				if(cardsDownList.get(i) == (cardsDownList.get(j) - consecutiveCards)) {
+					consecutiveCards++;
+					// If there are 5 consecutive cards, then the game is not over
+					if (consecutiveCards == 5) {
+						return false;
+					}
+				}
+			}
+		}
+		// If the last five turned up cards were consecutive, then the game is over.
+		if(this.getTurnedCardsBuffer().size() == 0) {
+			return true;
+		}
+		return false;
+	}
 }

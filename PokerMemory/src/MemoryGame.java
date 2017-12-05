@@ -3,7 +3,7 @@
  *
  * @author Michael Leonhard (Original Author)
  * @author Modified by Bienvenido Vélez (UPRM)
- * @author Modified by UPRM Hackers.java (UPRM)
+ * @author Modified by RUMHackers.java (UPRM)
  * @version Dic 2017
  */
 
@@ -222,6 +222,16 @@ public class MemoryGame implements ActionListener {
 						"discovered a quintet.  The quintet will remain turned up.  If the cards are different, they will flip\r\n"+
 						"back over automatically after a short delay.  The game is won when you have discovered\r\n"+
 						"every quintet.\r\n"+
+						"\r\n"+
+						"STRAIGHT Level\r\n"+
+						"The game consists of a grid of distinct cards.  At the start of the game, every card is face down.\r\n"+
+						"The object is to find 5 cards in ascending order with at least two different suits.\r\n"+
+						"\r\n"+
+						"Turn them face up and if the cards have at least two different suits and are in order, then you\r\n" + 
+						"have discovered a straight. The cards will remain turned up. If the cards have the same suit, they will\r\n"+
+						"flip back over automatically after a short delay. The game is won when you have discovered every straight.\r\n"+
+						"Each time you flip five cards up, the turn counter will increase. Try to win the game in the fewest\r\n"+
+						"number of turns!\r\n" +
 						"\r\n"+
 						"COMBO Level\r\n"+
 						"The game consists of a grid of distinct cards.  At the start of the game, every card is face down.\r\n"+

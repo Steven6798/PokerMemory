@@ -2,10 +2,12 @@
  * Stores currently turned cards, allows only five cards to be uncovered on each turn.
  * Also handles turning cards back down after a delay if cards have different suits.
  * 
- * @author UPRM Hackers.java
+ * @author RUMHackers.java
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.swing.JFrame;
 
 public class FlushLevel extends FourOfAKindLevel {
@@ -55,39 +57,30 @@ public class FlushLevel extends FourOfAKindLevel {
 		ArrayList<String> cardsDownList = new ArrayList<String>();
 		for (int i = 0; i< this.getGrid().size(); i++) {
 			if(!this.getGrid().get(i).isFaceUp()) {
-				// Store every face down card suit on the array.
+				// Store every face-down card suit in the array.
 				cardsDownList.add(this.getGrid().get(i).getSuit());
 			}
 		}
+		// Sort the array
+		Collections.sort(cardsDownList);
 		for (int i = 0; i<cardsDownList.size(); i++) {
-			int clubs = 0;
-			int spades = 0;
-			int hearts = 0;
-			int diamonds = 0;
+			int cardsWithSameSuit = 0;
 			for (int j = 0; j<cardsDownList.size(); j++) {
-				// Compare the selected card suit with the others.
+				// Compare the selected card suit with the others
 				if(cardsDownList.get(i).equals(cardsDownList.get(j))) {
-					if(cardsDownList.get(i).equals("c")) {
-						clubs++;
-					}
-					else if(cardsDownList.get(i).equals("s")) {
-						spades++;
-					}
-					else if(cardsDownList.get(i).equals("h")) {
-						hearts++;
-					}
-					else if(cardsDownList.get(i).equals("d")) {
-						diamonds++;
-					}
-					// Since always the last 10 cards are 2 spades and hearts and 3 clubs and diamonds,
-					// the game will not finish until that condition is true.
-					if (clubs > 3 || spades > 2 || hearts > 2 || diamonds > 3 ) {
+					cardsWithSameSuit++;
+					// If there are 5 cards with the same suit, then the game is not over
+					if(cardsWithSameSuit == 5) {
 						return false;
 					}
 				}
 			}
 		}
-		return true;
+		// If the last five turned up cards have the same suit, then the game is over.
+		if(this.getTurnedCardsBuffer().size() == 0) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

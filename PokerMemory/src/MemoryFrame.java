@@ -149,8 +149,8 @@ public class MemoryFrame extends JFrame {
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		panel_1.add(horizontalStrut_2);
 		
-//		JLabel lblNewLabel = new JLabel("Turns:");
-//		panel_1.add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel("Turns:");
+		panel_1.add(lblNewLabel);
 		
 		turnCounterLabel = new TurnsTakenCounterLabel();
 		turnCounterLabel.setText("");
@@ -165,9 +165,9 @@ public class MemoryFrame extends JFrame {
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 
-//		JLabel lblNewLabel_2 = new JLabel("Score:");
-//		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-//		panel_1.add(lblNewLabel_2);
+		JLabel lblNewLabel_2 = new JLabel("Score:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblNewLabel_2);
 		
 		scoreCounterLabel = new ScoreCounterLabel();
 		scoreCounterLabel.setText("");
@@ -329,6 +329,16 @@ public class MemoryFrame extends JFrame {
 						"discovered a quintet.  The quintet will remain turned up.  If the cards are different, they will flip\r\n"+
 						"back over automatically after a short delay.  The game is won when you have discovered\r\n"+
 						"every quintet.\r\n"+
+						"\r\n"+
+						"STRAIGHT Level\r\n"+
+						"The game consists of a grid of distinct cards.  At the start of the game, every card is face down.\r\n"+
+						"The object is to find 5 cards in ascending order with at least two different suits.\r\n"+
+						"\r\n"+
+						"Turn them face up and if the cards have at least two different suits and are in order, then you\r\n" + 
+						"have discovered a straight. The cards will remain turned up. If the cards have the same suit, they will\r\n"+
+						"flip back over automatically after a short delay. The game is won when you have discovered every straight.\r\n"+
+						"Each time you flip five cards up, the turn counter will increase. Try to win the game in the fewest\r\n"+
+						"number of turns!\r\n" +
 						"\r\n"+
 						"COMBO Level\r\n"+
 						"The game consists of a grid of distinct cards.  At the start of the game, every card is face down.\r\n"+

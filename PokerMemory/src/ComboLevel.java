@@ -2,7 +2,7 @@
  * Stores currently turned cards, allows only five cards to be uncovered on each turn.
  * Also handles turning cards back down after a delay if the user don't want the uncovered hand.
  * 
- * @author UPRM Hackers.java
+ * @author RUMHackers.java
  */
 
 import javax.swing.JFrame;

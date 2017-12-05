@@ -1,13 +1,19 @@
 /**
- * This class classify the turned up cards into a poker hand.
+ * This class classify the turned up cards in a specific poker-hand.
  * 
- * @author UPRM Hackers.java
+ * @author RUMHackers.java
  */
 
 import java.util.Vector;
 
 public class PokerHand {
 	
+	/**
+	 * Get the rank value of the five cards and calculates the sum.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return the sum of the ranks.
+	 */
 	public static int cardsRankSum(Vector<Card> turnedCardsBuffer) {
 
 		int sumOfRanks = turnedCardsBuffer.get(0).getRankValue() + turnedCardsBuffer.get(1).getRankValue()
@@ -16,6 +22,12 @@ public class PokerHand {
 		return sumOfRanks;
 	}
 	
+	/**
+	 * Check if the hand is a Straight-Flush poker hand.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return true if the hand is a Straight-Flush poker hand.
+	 */
 	public static boolean isStraightFlush(Vector<Card> turnedCardsBuffer) {
 
 		if (isStraight(turnedCardsBuffer) == true && isFlush(turnedCardsBuffer) == true) {
@@ -24,6 +36,12 @@ public class PokerHand {
 		return false;
 	}
 	
+	/**
+	 * Check if the hand is a Four of a Kind poker hand.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return true if the hand is a Four of a Kind poker hand.
+	 */
 	public static boolean isFourOfAKind(Vector<Card> turnedCardsBuffer) {
 
 		if ((turnedCardsBuffer.get(0).getRank().equals(turnedCardsBuffer.get(1).getRank()))
@@ -39,6 +57,12 @@ public class PokerHand {
 		return false;
 	}
 	
+	/**
+	 * Check if the hand is a Full House poker hand.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return true if the hand is a Full House poker hand.
+	 */
 	public static boolean isFullHouse(Vector<Card> turnedCardsBuffer) {
 
 		if (isThreeOfAKind(turnedCardsBuffer) == true && isOnePair(turnedCardsBuffer) == true) {
@@ -47,6 +71,12 @@ public class PokerHand {
 		return false;
 	}
 	
+	/**
+	 * Check if the hand is a Flush poker hand.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return true if the hand is a Flush poker hand.
+	 */
 	public static boolean isFlush(Vector<Card> turnedCardsBuffer) {
 		
 		if((turnedCardsBuffer.get(0).getSuit().equals(turnedCardsBuffer.get(1).getSuit()))
@@ -60,6 +90,12 @@ public class PokerHand {
 		}
 	}
 	
+	/**
+	 * Check if the hand is a Straight poker hand.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return true if the hand is a Straight poker hand.
+	 */
 	public static boolean isStraight(Vector<Card> turnedCardsBuffer) {
 		
 		if(((turnedCardsBuffer.get(0).getRankValue() == (turnedCardsBuffer.get(1).getRankValue() - 1))
@@ -78,7 +114,13 @@ public class PokerHand {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Check if the hand is a Three of a Kind poker hand.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return true if the hand is a Three of a Kind poker hand.
+	 */
 	public static boolean isThreeOfAKind(Vector<Card> turnedCardsBuffer) {
 
 		if ((turnedCardsBuffer.get(0).getRank().equals(turnedCardsBuffer.get(1).getRank()) 
@@ -91,7 +133,13 @@ public class PokerHand {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Check if the hand is a Two Pair poker hand.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return true if the hand is a Two Pair poker hand.
+	 */
 	public static boolean isTwoPair(Vector<Card> turnedCardsBuffer) {
 
 		if (turnedCardsBuffer.get(0).getRank().equals(turnedCardsBuffer.get(1).getRank())) {
@@ -108,7 +156,13 @@ public class PokerHand {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Check if the hand is a One Pair poker hand.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return true if the hand is a One Pair poker hand.
+	 */
 	public static boolean isOnePair(Vector<Card> turnedCardsBuffer) {
 
 		if (turnedCardsBuffer.get(0).getRank().equals(turnedCardsBuffer.get(1).getRank())
@@ -120,6 +174,12 @@ public class PokerHand {
 		return false;
 	}
 	
+	/**
+	 * Check if the hand have more than 1 Suit.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return true if the hand have more than 1 Suit.
+	 */
 	public static boolean isMoreThan1Suit(Vector<Card> turnedCardsBuffer) {
 		
 		int counter = 0;
@@ -134,7 +194,12 @@ public class PokerHand {
 		return true;
 	}
 	
-
+	/**
+	 * Set a certain score depending of the poker-hand.
+	 * 
+	 * @param turnedCardsBuffer.
+	 * @return the score of the hand.
+	 */
 	public static int checkHand(Vector<Card> turnedCardsBuffer) {
 		
 		// Straight Flush

@@ -4,7 +4,7 @@
  *
  * @author Michael Leonhard (Original Author)
  * @author Modified by Bienvenido Vélez (UPRM)
- * @author Modified by UPRM Hackers.java (UPRM)
+ * @author Modified by RUMHackers.java (UPRM)
  * @version Dic 2017
  */
 
